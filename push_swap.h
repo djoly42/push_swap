@@ -11,12 +11,18 @@ typedef struct  s_node
     int     index;
 }
 
+
+typedef struct  s_pile t_pile;
+typedef struct  s_pile
+{
+    t_node  *beg;
+    t_node  *last;
+    int     size;
+}
+
 typedef struct  s_env t_env;
 typedef struct  s_env
 {
-    t_node  *a_beg;
-    t_node  *a_last;
-    int     a_size;
     t_node  *b_beg;
     t_node  *b_last;
     int     b_size;
