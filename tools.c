@@ -76,3 +76,13 @@ void    rr(t_pile *pile_a, t_pile *pile_b)
     ra(pile_a);
     rb(pile_b);
 }
+
+void    rra(t_pile *pile_a)
+{
+    t_node  *tmp;
+    tmp = pile_a->last;
+    pile_a->beg = pile_a->beg->next;
+    pile_a->beg->prev = NULL;
+    pile_a->last->next = tmp;
+    pile_a->last = tmp;
+}
