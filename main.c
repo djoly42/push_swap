@@ -26,28 +26,27 @@ void    init_a(t_pile *pile_a, char *av, int nb)
 	pile_a->last = tmp;
 }*/
 
-void    init_a(t_pile *pile_a, char *av, int nb)
+void    init_a(t_pile *pile_a, char **av, int nb)
 {
 	int i;
 	t_node  *tmp;
 	t_node  *tmp2;
 
-	i = 0;
-	while (i < nb)
+	i = 2;
+	tmp = (t_node*)malloc(sizeof(t_node));
+	tmp->data = atoi(av[1]);
+	tmp->index = 1;
+	pile_a->beg = tmp;
+	tmp->prev = NULL;
+	while (i <= nb)
 	{
-		tmp = (t_node*)malloc(sizeof(t_node));
-		tmp->data = atoi(&av[i]);
-		printf("s:%c ", av[i]);
-		printf("d:%d ", tmp->data);
-		tmp->index = i;
-		if (i == 0)
-		{
-			pile_a->beg = tmp;
-			tmp->prev = NULL;
-		}
-		else
-			tmp->prev = tmp2;
-		tmp2 = tmp;
+		tmp->next = (t_node*)malloc(sizeof(t_node));
+		tmp->next->data = atoi(av[i]);
+		//printf("s:%s ", av[i]);
+		//printf("d:%d ", tmp->data);
+		tmp->next->index = i;
+		tmp->next->prev = tmp;
+		tmp2 = tmp->next;
 		tmp = tmp->next;
 		i++;
 	}
@@ -62,7 +61,7 @@ void	aff_pile(t_pile *pile)
 	tmp = pile->beg;
 	while (tmp)
 	{
-		ft_printf("%d ",tmp->data);
+		ft_printf("aff >>%d<<",tmp->data);
 		tmp = tmp->next;
 	}
 }
