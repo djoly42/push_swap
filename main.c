@@ -1,6 +1,6 @@
 
 #include "push_swap.h"
-
+#include <stdio.h>
 /*
 void    init_a(t_pile *pile_a, char *av, int nb)
 {
@@ -32,13 +32,15 @@ void    init_a(t_pile *pile_a, char *av, int nb)
 	t_node  *tmp;
 	t_node  *tmp2;
 
-	i = 1;
+	i = 0;
 	while (i < nb)
 	{
 		tmp = (t_node*)malloc(sizeof(t_node));
-		tmp->data = ft_atoi(av[i]);
+		tmp->data = atoi(&av[i]);
+		printf("s:%c ", av[i]);
+		printf("d:%d ", tmp->data);
 		tmp->index = i;
-		if (i == 1)
+		if (i == 0)
 		{
 			pile_a->beg = tmp;
 			tmp->prev = NULL;
@@ -53,7 +55,7 @@ void    init_a(t_pile *pile_a, char *av, int nb)
 	pile_a->last = tmp2;
 }
 
-void	aff_pile(t_pile pile)
+void	aff_pile(t_pile *pile)
 {
 	t_node	*tmp;
 
@@ -70,10 +72,10 @@ int     main(int argc, char *argv)
 	t_pile  pile_a;
 	t_pile  pile_b;
 
-	if (argc < 2)
+	if (argc == 1)
 		return (0);
 	init_a(&pile_a, argv, (argc - 1));
-	aff_pile(pile_a);	
+	aff_pile(&pile_a);	
 
 
 	return (0);
