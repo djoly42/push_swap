@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/16 11:26:26 by djoly             #+#    #+#             */
+/*   Updated: 2016/03/16 15:54:42 by djoly            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "push_swap.h"
-#include <stdio.h>
+
+#include "Includes/push_swap.h"
 /*
 void    init_a(t_pile *pile_a, char *av, int nb)
 {
@@ -26,47 +37,9 @@ void    init_a(t_pile *pile_a, char *av, int nb)
 	pile_a->last = tmp;
 }*/
 
-void    init_a(t_pile *pile_a, char **av, int nb)
-{
-	int i;
-	t_node  *tmp;
-	t_node  *tmp2;
 
-	i = 2;
-	tmp = (t_node*)malloc(sizeof(t_node));
-	tmp->data = atoi(av[1]);
-	tmp->index = 1;
-	pile_a->beg = tmp;
-	tmp->prev = NULL;
-	while (i <= nb)
-	{
-		tmp->next = (t_node*)malloc(sizeof(t_node));
-		tmp->next->data = atoi(av[i]);
-		//printf("s:%s ", av[i]);
-		//printf("d:%d ", tmp->data);
-		tmp->next->index = i;
-		tmp->next->prev = tmp;
-		tmp2 = tmp->next;
-		tmp = tmp->next;
-		i++;
-	}
-	tmp = NULL;
-	pile_a->last = tmp2;
-}
 
-void	aff_pile(t_pile *pile)
-{
-	t_node	*tmp;
-
-	tmp = pile->beg;
-	while (tmp)
-	{
-		ft_printf("aff >>%d<<",tmp->data);
-		tmp = tmp->next;
-	}
-}
-
-int     main(int argc, char *argv)
+int     main(int argc, char **argv)
 {
 	t_pile  pile_a;
 	t_pile  pile_b;
@@ -74,8 +47,9 @@ int     main(int argc, char *argv)
 	if (argc == 1)
 		return (0);
 	init_a(&pile_a, argv, (argc - 1));
-	aff_pile(&pile_a);	
-
+	init_pile_null(&pile_b);
+	solve(&pile_a, &pile_b);
+	aff_pile(&pile_b);
 
 	return (0);
 }
