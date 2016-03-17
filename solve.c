@@ -13,7 +13,7 @@
 #include "Includes/push_swap.h"
 
 
-int		pilechr(t_pile pile, int data)
+int		pilechr(t_pile *pile, int data)
 {
 	int	f;
 	int	b;
@@ -25,7 +25,7 @@ int		pilechr(t_pile pile, int data)
 	tmp2 = pile->last;
 	f = 0;
 	b = 0;
-	find;
+	find = 0;
 	while (!find)
 	{
 		if (data > tmp->data)// && data > tmp->next->data)
@@ -47,7 +47,7 @@ int		pilechr(t_pile pile, int data)
 
 	}
 
-
+return (b);
 }
 
 int		solve(t_pile *pile_a, t_pile *pile_b)
@@ -57,8 +57,8 @@ int		solve(t_pile *pile_a, t_pile *pile_b)
 
 	while (pile_a->beg)
 	{
-		tmp = pile_a->beg
-		a = pilechr(pile_b ,data);
+		tmp = pile_a->beg;
+		a = pilechr(pile_b ,tmp->data);
 	}
-	return (0);
+	return (a);
 }
