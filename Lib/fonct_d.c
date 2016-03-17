@@ -1,0 +1,261 @@
+
+#include "ft_printf.h"
+
+
+static void ft_putzero(t_env *env)
+{
+	int i;
+
+	if ((int)ARG < 0 &&  env->putneg!= 1)
+	{
+		RET = RET + ft_putchar('-');
+		ARG = (-1) * (int)env->arg;
+		NBR = NBR - 1;
+		env->putneg = 1;
+	}
+	if (NBR != -1)
+	NBR = NBR - ft_nbrlen((int)ARG);
+	i = -1;
+	while (++i < (NBR))
+	RET = RET + ft_putchar('0');
+	/*
+	ft_putstr(">>ret02>>");
+	ft_putnbr(RET);
+	ft_putstr("<<");
+	*/
+}
+
+static void     ft_flag_prec(t_env *env)
+{
+	int pos;
+
+	FNDFLAGS[1] == -1;
+	if ((int)ARG == 0 && NBR == -1 && NBRPREC == -1)//
+	return ;
+	if (NBRPREC == -1 && NBRPREC < ARGLEN && (int)ARG != 0)
+	NBRPREC = ARGLEN;
+	if (NBR >= ARGLEN && NBR > NBRPREC && FNDFLAGS[2] == -1) // nbr sans -
+	{
+		if (FNDFLAGS[3] == 1) // +
+		NBR = NBR - 1;
+		if ((int)ARG < 0 && ARGLEN < NBRPREC)
+		NBR = NBR - 1;
+		/*ft_putstr(">>NBR>>");
+		ft_putnbr(NBR);
+		ft_putstr("<<");
+		ft_putstr(">>NBRPREC>>");
+		ft_putnbr(NBRPREC);
+		ft_putstr("<<");
+		ft_putstr(">>ARGLEN>>");
+		ft_putnbr(ARGLEN);
+		ft_putstr("<<");*/
+		if (NBRPREC >= ARGLEN) //!= -1)
+			RET = RET + ft_putspace(NBR - NBRPREC);
+		else if ((int)ARG == 0 && NBRPREC == -1)
+			RET = RET + ft_putspace(NBR);
+		else if (ARGLEN > NBRPREC)
+			RET = RET + ft_putspace(NBR - ARGLEN);
+		//ft_putstr(">>NBR>>");
+	}
+	if (FNDFLAGS[3] == 1) // +
+	RET = RET + ft_putchar('+');
+	if (NBRPREC >= ARGLEN)
+	{
+		if ((int)ARG < 0 && env->putneg != 1)
+		{
+			RET = RET + ft_putchar('-');
+			ARG = (-1) * (int)env->arg;
+			//if (NBR != -1)
+			NBR = NBR - 1;
+			env->putneg = 1;
+
+		}
+		//if (FNDFLAGS[2] == -1 && FNDFLAGS[1] == -1)
+		//{
+			if (NBRPREC == ARGLEN && env->putneg == 1)
+			RET = RET + ft_putzero2(1);
+			else if (NBRPREC > ARGLEN && env->putneg == 1)
+			RET = RET + ft_putzero2(NBRPREC - ARGLEN + 1);
+			else
+			RET = RET + ft_putzero2(NBRPREC - ARGLEN);
+		//}
+		//		ft_putstr(">>putzero<<");
+	}
+	if (NBRPREC != -1)
+	{
+		if (FNDFLAGS[5] == -1 && FNDFLAGS[6] == -1 && FNDFLAGS[7] == -1 && FNDFLAGS[8] == -1 && (int)ARG < 0)//          (long long int)ARG < 9223372036854775808)//  (long long int)ARG < 0 )//&& FNDFLAGS[2] != 1) // - nest pas encore ecrie, voir putzero
+		{
+			//		ft_putstr(">>DANS IF1>>");
+			pos = (-1) * (int)ARG;
+			if (env->putneg != 1)
+			{
+				RET = RET + ft_putchar('-');
+				env->putneg = 1;
+			}
+			RET = RET + ft_putnbr(pos);
+		}
+		else if(FNDFLAGS[6] == 1)
+		{
+			//		ft_putstr(">>DANS IF2>>");
+			RET = RET + ft_putnbr((long int)ARG);
+		}
+		else if(FNDFLAGS[6] == 2)
+		{
+			//    printf(">>%lld<<",ARG);
+			//	ft_putstr(">>DANS IF3>>");
+			RET = RET + ft_putnbr((long long int)ARG);
+		}
+		else if(FNDFLAGS[5] == 1)
+		{
+			//	ft_putstr(">>DANS IF4>>");
+			RET = RET + ft_putnbr((short int)ARG);
+		}
+		else if(FNDFLAGS[5] == 2)
+		{
+			//	ft_putstr(">>DANS IF5>>");
+			RET = RET + ft_putnbr((signed char)ARG);
+		}
+		else if(FNDFLAGS[7] == 1)
+		{
+			//	ft_putstr(">>DANS J>>");
+			RET = RET + ft_putnbr((intmax_t)ARG);
+		}
+		else if(FNDFLAGS[8] == 1)
+		{
+			//	ft_putstr(">>DANS Z>>");
+			RET = RET + ft_putnbr((size_t)ARG);
+		}
+		else
+		{
+			//	ft_putstr(">>DANS ELSE>>");
+			RET = RET + ft_putnbr((int)ARG);
+		}
+	}
+	if (NBR != -1 && FNDFLAGS[2] == 1)
+	{
+		if (FNDFLAGS[3] == 1) // +
+		NBR = NBR - 1;
+		RET = RET + ft_putspace(NBR - NBRPREC);
+	}
+}
+
+
+int     fonct_d(t_env *env)
+{
+	int	pos;
+
+	ARGLEN = ft_nbrlen((int)ARG);
+	if (FNDFLAGS[2] == 1)
+		FNDFLAGS[1] = -1;
+	if (FNDFLAGS[9] == 1)//.
+	ft_flag_prec(env);
+	else
+	{
+		if(FNDFLAGS[2] != 1) // pas de -
+		{
+
+			if (FNDFLAGS [1] == -1 && NBR != -1 && NBR > ft_nbrlen((int)ARG))// pas de 0  nbr > arg
+			{
+				if (FNDFLAGS[3] == 1 && (int)ARG > 0)
+				NBR = NBR - 1;
+				RET = RET + ft_putspace((NBR = NBR - ft_nbrlen((int)ARG)));
+			}
+			else if (FNDFLAGS[4] == 1 && FNDFLAGS[3] == -1 && ((int)ARG >= 0)) // && NBR == -1 ' ' pas de NBR
+			{
+				RET = RET + ft_putchar(' ');
+				NBR = NBR - 1;
+			}
+
+			if ((FNDFLAGS[3] == 1) && ((int)ARG >= 0)) //(FNDFLAGS[2] != 1))// + et pas de -ARG || ((int)ARG > 0)))
+			{
+				if (env->putneg != 1)
+				{
+					//ft_putstr(">>DANS IF>>");
+					RET = RET + ft_putchar('+');
+					NBR = NBR - 1;
+					//FNDFLAGS[3] == -1;
+				}
+			}
+			if (NBR != -1 && NBR > ft_nbrlen((int)ARG))// && ITOK == 12)
+			{
+
+				if (FNDFLAGS[1] == 1 && FNDFLAGS[2] != 1) //0
+				ft_putzero(env);
+			}
+		}
+		if ((int)ARG >= 0 && FNDFLAGS[3] == 1 && FNDFLAGS[2] == 1) // +
+		{
+			ARGLEN = ARGLEN + 1;
+			RET = RET + ft_putchar('+');
+		}
+		if (FNDFLAGS[5] == -1 && FNDFLAGS[6] == -1 && FNDFLAGS[7] == -1 && FNDFLAGS[8] == -1 && (int)ARG < 0)//          (long long int)ARG < 9223372036854775808)//  (long long int)ARG < 0 )//&& FNDFLAGS[2] != 1) // - nest pas encore ecrie, voir putzero
+		{
+			//ft_putstr(">>DANS IF1>>");
+			RET = RET + ft_putnbr((int)ARG);//pos);
+		}
+		else if(FNDFLAGS[6] == 1)
+		{
+			//ft_putstr(">>DANS IF2>>");
+			RET = RET + ft_putnbr((long int)ARG);
+		}
+		else if(FNDFLAGS[6] == 2)
+		{
+			//    printf(">>%lld<<",ARG);
+			//ft_putstr(">>DANS IF3>>");
+			RET = RET + ft_putnbr((long long int)ARG);
+		}
+		else if(FNDFLAGS[8] == 1)
+		{
+			//	ft_putstr(">>DANS Z>>");
+			RET = RET + ft_putnbr((size_t)ARG);
+		}
+		else if(FNDFLAGS[5] == 2)
+		{
+			//ft_putstr(">>DANS IF5>>");
+			RET = RET + ft_putnbr((signed char)ARG);
+		}
+		else if(FNDFLAGS[7] == 1)
+		{
+			//ft_putstr(">>DANS J>>");
+			RET = RET + ft_putnbr((intmax_t)ARG);
+		}
+		else if(FNDFLAGS[5] == 1)
+		{
+			//ft_putstr(">>DANS H>>");
+			RET = RET + ft_putnbr((short int)ARG);
+		}
+		else
+		{
+			//	ft_putstr(">>DANS ELSE>>");
+			RET = RET + ft_putnbr((int)ARG);
+		}
+		/*
+		ft_putstr(">>RET2>>");
+		ft_putnbr(NBR);
+		ft_putstr("<<");
+		*/
+		if(FNDFLAGS[2] == 1 ) //-
+		{
+
+			if ( (FNDFLAGS[4] == 1 && NBR == -1)) // ' ' pas de NBR
+			if ((int)ARG > 0)
+			RET = RET + ft_putchar(' ');
+			if (NBR != -1 && NBR > ft_nbrlen((int)ARG))// && ITOK == 12)
+			{
+				if (FNDFLAGS[2] == -1 && (FNDFLAGS[3] == 1) && ((int)ARG > 0))//env->putneg != 1)//((int)ARG > 0)) // + et ARG >0
+				NBR = NBR - 1;
+				/*
+				ft_putstr(">>NBR>>");
+				ft_putnbr(NBR);
+				ft_putstr("<<");*/
+				//if (FNDFLAGS[3] == 1) // +
+					//ARGLEN = ARGLEN + 1;
+				if (FNDFLAGS[1] == 1 && FNDFLAGS[2] != 1) //0
+					ft_putzero(env);
+				else
+					RET = RET + ft_putspace(NBR - ARGLEN);
+			}
+		}
+	}
+	return (1);
+}
