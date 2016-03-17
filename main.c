@@ -48,8 +48,8 @@ int     main(int argc, char **argv)
 		return (0);
 	init_a(&pile_a, argv, (argc - 1));
 	init_pile_null(&pile_b);
-	solve(&pile_a, &pile_b);
-	aff_pile(&pile_b);
-
+//	solve(&pile_a, &pile_b);
+//	aff_pile(&pile_b);
+	test(&pile_a, &pile_b);
 	return (0);
 }

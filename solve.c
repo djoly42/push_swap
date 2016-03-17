@@ -13,52 +13,45 @@
 #include "Includes/push_swap.h"
 
 
-int		pilechr(t_pile *pile, int data)
+int		chr_forward(int data, t_node *node)
 {
-	int	f;
-	int	b;
-	int find;
-	t_node *tmp;
-	t_node *tmp2;
+	int	i;
+	t_node	*tmp;
 
-	tmp = pile->beg;
-	tmp2 = pile->last;
-	f = 0;
-	b = 0;
-	find = 0;
-	while (!find)
+	tmp = node;
+	i = 0;
+	while (tmp->data < data && data > tmp->next->data && tmp->data < tmp->next->data)
 	{
-		if (data > tmp->data)// && data > tmp->next->data)
-		{
-			tmp = tmp->next;
-			f++;
-		}
-		else
-			break;
-		if (data > tmp2->data && data > tmp->prev->data)
-		{
-			tmp = tmp->next;
-			b++;
-		}
-		else
-			break;
-
-
-
+		tmp = tmp->next;
+		i++:
 	}
-
-return (b);
+	return (i);
 }
 
+int		chr_back(int data, t_node *node)
+{
+	int	i;
+	t_node	*tmp;
+
+	tmp = node;
+	i = 0;
+	while (tmp->prev->data < data && data > tmp->data && tmp->prev->data < tmp->data)
+	{
+		tmp = tmp->prev;
+		i++:
+	}
+	return (i);
+}
 int		solve(t_pile *pile_a, t_pile *pile_b)
 {
-	t_node	*tmp;
-	int		a;
+	int	f[4];
 
-	while (pile_a->beg)
+	f[0] = chr_forward(pile_a->beg->data, pile_b->beg);
+	f[1] = chr_back(pile_a->beg->data, pile_b->last);
+	if (pile_a->beg->next != NULL)
 	{
-		tmp = pile_a->beg;
-		a = pilechr(pile_b ,tmp->data);
+		f[2] = chr_forward(pile_a->beg->next->data, pile_b->beg);
+		f[3] = chr_back(pile_a->beg->next->data, pile_b->last);
 	}
-	return (a);
+	return (wich_behavior(f[]));
 }
