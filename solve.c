@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:43:49 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 16:29:06 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 18:16:00 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,32 @@ int		chr_forward(int data, t_pile *pile)
 
 	if (pile->beg == NULL)
 		return (0);
+	if (data > pile->max)
+		return (chrmax_forward(pile->max, pile));
+	if (data < pile->min)
+		return (chrmin_forward(pile->min, pile));
 	tmp = pile->beg;
 	i = 0;
 	if (tmp->next != NULL)
 	{
-		if (data > pile->max && (tmp->data == pile->max || pile->last->data == pile->max))
+		if (data > pile->max && (tmp->data == pile->max))// || pile->last->data == pile->max))
 			return (0);
-		if (data < pile->min && (tmp->data == pile->min || pile->last->data == pile->min))
+		if (data < pile->min && (tmp->data == pile->min))// || pile->last->data == pile->min))
 			return (0);
+//					ft_putstr(">>TEST<<");
 		tmp = tmp->next;
 		while (tmp)
 		{
 			i++;
 			if (tmp->prev->data < data && data < tmp->data)
 				break;
+			if (tmp->prev->data == pile->max && data < tmp->data)
+				break;
 			if (tmp->next == NULL)
 			{
 				if (data > tmp->data)
-					return (++i);
-				i = -2;
+					return (i);
+				i = -1;
 				break;
 			}
 			tmp = tmp->next;
@@ -53,14 +60,19 @@ int		chr_back(int data, t_pile *pile)
 
 	if (pile->beg == NULL)
 		return (0);
+	if (data > pile->max)
+		return (chrmax_back(pile->max, pile));
+	if (data < pile->min)
+		return (chrmin_back(pile->min, pile));
+
 	tmp = pile->last;
-	i = 0;
+	i = 1;
 	if (tmp->prev != NULL)
 	{
-		if (data > pile->max && (tmp->data == pile->max || pile->beg->data == pile->max))
-			return (0);
-		if (data < pile->min && (tmp->data == pile->min || pile->beg->data == pile->min))
-			return (0);
+		if (data > pile->max && (tmp->data == pile->max))// || pile->beg->data == pile->max))
+			return (1);
+		if (data < pile->min && (tmp->data == pile->min))// || pile->beg->data == pile->min))
+			return (1);
 		tmp = tmp->prev;
 		while (tmp)
 		{
@@ -71,7 +83,7 @@ int		chr_back(int data, t_pile *pile)
 			{
 				if (data < tmp->data)
 					return (++i);
-				i = -2;
+				i = -1;
 				break;
 			}
 			tmp = tmp->prev;
@@ -85,13 +97,13 @@ int		which_behavior(int f[])
 	int i;
 	int ret;
 
-	ret = f[0];
+	ret = 0;
 	i = 1;
 	while(i < 4)
 	{
 		if(f[i] == -1)
-			return (--ret);
-		if (f[i] < ret)
+			return (ret);
+		if (f[i] < f[ret])
 			ret = i;
 		i++;
 	}
@@ -212,11 +224,17 @@ int		solve(t_pile *pile_a, t_pile *pile_b)
 	int	f[4];
 	init_f(f);
 	find_path(pile_a, pile_b, f);
-//	ft_printf("f0:%d f1:%d f2:%d f3:%d ",f[0], f[1], f[2], f[3]);
-//	push(pile_a, pile_b, which_behavior(f));
-//	ft_printf("behaviour: %d \n", which_behavior(f));
+
+	ft_printf("\n\npile_a:");
+	rev_aff_pile(pile_a);
+	ft_printf("\npile_b:");
+	rev_aff_pile(pile_b);
+	ft_printf("\nf0:%d f1:%d f2:%d f3:%d ",f[0], f[1], f[2], f[3]);
+	ft_printf("behaviour: %d \n", which_behavior(f));
 	behavior(pile_a, pile_b, f);
-//	rev_aff_pile(pile_a);
-//	rev_aff_pile(pile_b);
+	ft_printf("pile_a:");
+	rev_aff_pile(pile_a);
+	ft_printf("\npile_b:");
+	rev_aff_pile(pile_b);
 	return (0);
 }

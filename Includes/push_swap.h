@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:57:48 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 16:17:18 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 18:13:34 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	rev_test(t_pile *pile_a, t_pile *pile_b);
 int		solve(t_pile *pile_a, t_pile *pile_b);
 int		multi_r_pile(t_pile *pile, int n, char p);
 int		multi_rr_pile(t_pile *pile, int n, char p);
-
+int		chrmax_forward(int data, t_pile *pile);
+int		chrmin_forward(int data, t_pile *pile);
+int		chrmax_back(int data, t_pile *pile);
+int		chrmin_back(int data, t_pile *pile);
 
 /*
 typedef struct  s_env t_env;
