@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:57:48 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 12:10:56 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 13:57:57 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ struct  s_pile
 
 void    pb(t_pile *pile_a, t_pile *pile_b);
 void    pa(t_pile *pile_a, t_pile *pile_b);
+void    rb(t_pile *pile_b);
+void    ra(t_pile *pile_b);
 void    init_a(t_pile *pile_a, char **av, int nb);
 void	init_pile_null(t_pile *pile);
 void	aff_pile(t_pile *pile); //
