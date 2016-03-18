@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:14 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 10:36:40 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 12:26:41 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void    init_a(t_pile *pile_a, char **av, int nb)
 	i = 2;
 	tmp = (t_node*)malloc(sizeof(t_node));
 	tmp->data = atoi(av[1]);
+	pile_a->min = tmp->data;
+	pile_a->max = tmp->data;
 	tmp->index = 1;
 	pile_a->beg = tmp;
 	tmp->prev = NULL;
@@ -37,6 +39,10 @@ void    init_a(t_pile *pile_a, char **av, int nb)
 		tmp->next->data = atoi(av[i]);
 		//ft_printf("s:%s ", av[i]);
 		//ft_printf("d:%d ", tmp->data);
+		if (tmp->next->data > pile_a->max)
+			pile_a->max = tmp->next->data;
+		if (tmp->next->data < pile_a->min)
+			pile_a->min = tmp->next->data;
 		tmp->next->index = i;
 		tmp->next->prev = tmp;
 		tmp2 = tmp->next;
@@ -76,5 +82,6 @@ void	rev_aff_pile(t_pile *pile)
 		ft_printf("%d ",tmp->data);
 		tmp = tmp->prev;
 	}while (tmp);
+	ft_printf(" max:%d min:%d", pile->max, pile->min);
 	ft_putchar('\n');
 }

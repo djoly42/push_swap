@@ -25,6 +25,7 @@ void    sb(t_pile *pile)
     pile->beg->index = pile->beg->next->index;
     pile->beg->next->data = tmp;
     pile->beg->next->index = i;
+
 }
 
 void    ss(t_pile *pile_a, t_pile *pile_b)
@@ -36,12 +37,9 @@ void    ss(t_pile *pile_a, t_pile *pile_b)
 void    pb(t_pile *pile_a, t_pile *pile_b)
 {
 	t_node  *tmp;
-	//ft_putstr("STR");
+
 	if (pile_a->beg == NULL)
-	{
-	//	ft_putstr("RETURN");
 		return ;
-	}
 	tmp = pile_a->beg;
 	if (pile_a->beg->next != NULL)
 	{
@@ -52,7 +50,6 @@ void    pb(t_pile *pile_a, t_pile *pile_b)
 		init_pile_null(pile_a);
 	if (pile_b->beg != NULL)
 	{
-	//	ft_putstr(">>IF");
 		tmp->next = pile_b->beg;
 		pile_b->beg= tmp;
 		pile_b->beg->next->prev = pile_b->beg;
@@ -60,12 +57,15 @@ void    pb(t_pile *pile_a, t_pile *pile_b)
 	}
 	else
 	{
-	//	ft_putstr(">>ELSE");
 		tmp->next = NULL;
 		tmp->prev = NULL;
 		pile_b->beg = tmp;
 		pile_b->last = tmp;
 	}
+	if (tmp->data > pile_b->max)
+		pile_b->max = tmp->data;
+	if (tmp->data < pile_b->min)
+		pile_b->min = tmp->data;
 }
 
 void    pa(t_pile *pile_a, t_pile *pile_b)
@@ -101,6 +101,10 @@ void    pa(t_pile *pile_a, t_pile *pile_b)
 		pile_a->beg = tmp;
 		pile_a->last = tmp;
 	}
+	if (tmp->data > pile_a->max)
+		pile_a->max = tmp->data;
+	if (tmp->data < pile_a->min)
+		pile_a->min = tmp->data;
 }
 
 /*

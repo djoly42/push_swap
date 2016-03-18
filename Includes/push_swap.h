@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:57:48 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/16 15:57:50 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 12:10:56 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ int     index;
 typedef struct  s_pile t_pile;
 struct  s_pile
 {
-	t_node  *beg;
-	t_node  *last;
-	int     size;
+	t_node	*beg;
+	t_node	*last;
+	int		size;
+	int		min;
+	int		max;
 };
 
 void    pb(t_pile *pile_a, t_pile *pile_b);
