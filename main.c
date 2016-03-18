@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:26 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 18:26:49 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 18:35:35 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		chrmax_forward(int data, t_pile *pile)
 	if (tmp->next != NULL)
 	{
 		if (data == tmp->data)
-			return (i);
+			return (++i);
 		tmp = tmp->next;
 		while (tmp)
 		{

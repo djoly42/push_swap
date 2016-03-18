@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:43:49 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 18:16:00 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 18:44:41 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@ int		chr_back(int data, t_pile *pile)
 			if (tmp->prev == NULL)
 			{
 				if (data < tmp->data)
-					return (++i);
+					return (--i);
 				i = -1;
 				break;
 			}
 			tmp = tmp->prev;
 		}
 	}
-	return (i);
+	return (--i);
 }
 
 int		which_behavior(int f[])
@@ -230,7 +230,7 @@ int		solve(t_pile *pile_a, t_pile *pile_b)
 	ft_printf("\npile_b:");
 	rev_aff_pile(pile_b);
 	ft_printf("\nf0:%d f1:%d f2:%d f3:%d ",f[0], f[1], f[2], f[3]);
-	ft_printf("behaviour: %d \n", which_behavior(f));
+	ft_printf("\t\tbehaviour: %d \n", which_behavior(f));
 	behavior(pile_a, pile_b, f);
 	ft_printf("pile_a:");
 	rev_aff_pile(pile_a);
