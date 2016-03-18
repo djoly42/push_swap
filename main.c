@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:26 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/16 15:54:42 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 10:37:12 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,14 @@ int     main(int argc, char **argv)
 		return (0);
 	init_a(&pile_a, argv, (argc - 1));
 	init_pile_null(&pile_b);
-//	solve(&pile_a, &pile_b);
+	pb(&pile_a, &pile_b);
+	pb(&pile_a, &pile_b);
+	pb(&pile_a, &pile_b);
+	rev_aff_pile(&pile_a);
+	rev_aff_pile(&pile_b);
+	solve(&pile_a, &pile_b);
+
 //	aff_pile(&pile_b);
-	test(&pile_a, &pile_b);
+	//test(&pile_a, &pile_b);
 	return (0);
 }
