@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:43:49 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 12:31:53 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 13:15:21 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,15 @@ int		chr_back(int data, t_pile *pile)
 
 int		which_behavior(int f[])
 {
-	if (f[0] < f[1] && f[0] < f[2] && f[0] < f[3])
+	if (f[0] != -1 && f[0] <= f[1] && f[0] <= f[2] && f[0] <= f[3])
 		return (0);
-	if (f[0] > f[1] && f[1] < f[2] && f[1] < f[3])
+	if (f[1] != -1 && f[0] >= f[1] && f[1] <= f[2] && f[1] <= f[3])
 		return (1);
-	if (f[2] < f[1] && f[0] > f[2] && f[2] < f[3])
+	if (f[2] != -1 && f[2] <= f[1] && f[0] >= f[2] && f[2] <= f[3])
 		return (2);
-	if (f[3] < f[1] && f[3] < f[2] && f[0] > f[3])
+	if (f[3] != -1 && f[3] <= f[1] && f[3] <= f[2] && f[0] >= f[3])
 		return (3);
-	return (-1);
+	return (-10);
 }
 
 int		find_path(t_pile *pile_a,t_pile *pile_b,int *f)
@@ -100,22 +100,44 @@ int		find_path(t_pile *pile_a,t_pile *pile_b,int *f)
 	}
 	return (0);
 }
-/*
-int		push(t_pile pile_a, t_pile pile_b, int *f)
+
+int		multi_r(t_pile pile_a, int n, char p)
 {
+	if (p == 'a')
+	{
+	while (n)
+	{
+		ra(pile_a);
+		n--;
+	}
+}
+else
+{
+while (n)
+{
+	rb(pile_b);
+	n--;
+}
+}
 
 	return (0);
 }
-*/
-int		solve(t_pile *pile_a, t_pile *pile_b)
+
+void	init_f(int *f)
 {
-	int	f[4];
 	f[0] = -1;
 	f[1] = -1;
 	f[2] = -1;
 	f[3] = -1;
+}
+int		solve(t_pile *pile_a, t_pile *pile_b)
+{
+	int	f[4];
+
+	init_f(f);
 	find_path(pile_a, pile_b, f);
 	ft_printf("f0:%d f1:%d f2:%d f3:%d",f[0], f[1], f[2], f[3]);
-//	push(pile_a, pile_b, which_behavior(f[]));
+//	push(pile_a, pile_b, which_behavior(f));
+ft_printf("behaviour: %d ", which_behavior(f));
 	return (0);
 }

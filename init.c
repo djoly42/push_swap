@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:14 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 12:26:41 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 12:43:40 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,8 @@ void    init_a(t_pile *pile_a, char **av, int nb)
 	tmp->prev = NULL;
 	while (i <= nb)
 	{
-		//write(1,"ok", 2);
 		tmp->next = (t_node*)malloc(sizeof(t_node));
 		tmp->next->data = atoi(av[i]);
-		//ft_printf("s:%s ", av[i]);
-		//ft_printf("d:%d ", tmp->data);
 		if (tmp->next->data > pile_a->max)
 			pile_a->max = tmp->next->data;
 		if (tmp->next->data < pile_a->min)
@@ -57,13 +54,11 @@ void	aff_pile(t_pile *pile)
 {
 	ft_printf("pile:");
 	t_node	*tmp;
-//write(1,"11", 2);
 	tmp = pile->beg;
 	if (tmp == NULL)
 		return ;
 	do
 	{
-//		write(1,"22", 2);
 		ft_printf("%d ",tmp->data);
 		tmp = tmp->next;
 	}while (tmp);
@@ -72,13 +67,11 @@ void	aff_pile(t_pile *pile)
 void	rev_aff_pile(t_pile *pile)
 {
 	t_node	*tmp;
-//write(1,"11", 2);
 	tmp = pile->last;
 	if (tmp == NULL)
 		return ;
 	do
 	{
-//		write(1,"22", 2);
 		ft_printf("%d ",tmp->data);
 		tmp = tmp->prev;
 	}while (tmp);
