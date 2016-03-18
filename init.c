@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:14 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 12:43:40 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 15:18:34 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void    init_a(t_pile *pile_a, char **av, int nb)
 
 void	aff_pile(t_pile *pile)
 {
-	ft_printf("pile:");
+	ft_printf("rev pile: ");
 	t_node	*tmp;
 	tmp = pile->beg;
 	if (tmp == NULL)
@@ -62,10 +62,12 @@ void	aff_pile(t_pile *pile)
 		ft_printf("%d ",tmp->data);
 		tmp = tmp->next;
 	}while (tmp);
+	ft_putchar('\n');
 }
 
 void	rev_aff_pile(t_pile *pile)
 {
+	ft_printf("pile: ");
 	t_node	*tmp;
 	tmp = pile->last;
 	if (tmp == NULL)
@@ -75,6 +77,6 @@ void	rev_aff_pile(t_pile *pile)
 		ft_printf("%d ",tmp->data);
 		tmp = tmp->prev;
 	}while (tmp);
-	ft_printf(" max:%d min:%d", pile->max, pile->min);
+	ft_printf("\t\tmax:%d min:%d", pile->max, pile->min);
 	ft_putchar('\n');
 }

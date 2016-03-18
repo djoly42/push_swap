@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 14:34:23 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/16 15:58:48 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 15:12:14 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,20 @@
 
 void	test(t_pile *pile_a, t_pile *pile_b)
 {
-
-	ft_putstr("\t\t\tpilea ");
+	rrb(pile_b);
+	rra(pile_a);
+	rev_aff_pile(pile_a);
+	rev_aff_pile(pile_b);
+	aff_pile(pile_a);
+	aff_pile(pile_b);
+	ft_printf("rr\n");
+	rrb(pile_b);
+	//rra(pile_a);
+	rev_aff_pile(pile_a);
+	rev_aff_pile(pile_b);
+	aff_pile(pile_a);
+	aff_pile(pile_b);
+	/*ft_putstr("\t\t\tpilea ");
 	aff_pile(pile_a);
 	ft_putstr("\n");
 
@@ -141,5 +153,5 @@ void	rev_test(t_pile *pile_a, t_pile *pile_b)
 	ft_putstr("\tpileb ");
 	aff_pile(pile_b);
 	ft_putstr("\tpilea ");
-	aff_pile(pile_a);
+	aff_pile(pile_a);*/
 }

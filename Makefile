@@ -1,5 +1,5 @@
 
-NAME  = pushswap
+NAME  = push_swap
 
 CC = gcc
 
@@ -9,7 +9,7 @@ LIB = Lib/libftprintf.a
 
 HEAD = Includes/
 
-SRC = test.c main.c tools.c init.c solve.c 
+SRC = test.c main.c tools.c init.c solve.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -25,7 +25,7 @@ $(NAME):$(LIB) $(OBJ)
 %.o: %.c
 	$(CC) $(FLAGS) -I $(HEAD) -o $@ -c $<
 
-clean: 
+clean:
 	/bin/rm -f $(OBJ)
 	make -C Lib/ fclean
 
@@ -33,4 +33,3 @@ fclean: clean
 	/bin/rm -f $(NAME)
 
 re : fclean all
-

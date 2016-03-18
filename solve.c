@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:43:49 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 14:10:36 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 16:29:06 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		which_behavior(int f[])
 	while(i < 4)
 	{
 		if(f[i] == -1)
-			break;
+			return (--ret);
 		if (f[i] < ret)
 			ret = i;
 		i++;
@@ -110,7 +110,7 @@ int		find_path(t_pile *pile_a,t_pile *pile_b,int *f)
 	return (0);
 }
 
-int		multi_r(t_pile *pile, int n, char p)
+int		multi_r_pile(t_pile *pile, int n, char p)
 {
 	if (p == 'a')
 	{
@@ -131,6 +131,27 @@ int		multi_r(t_pile *pile, int n, char p)
 	return (0);
 }
 
+int		multi_rr_pile(t_pile *pile, int n, char p)
+{
+	if (p == 'a')
+	{
+		while (n)
+		{
+			rra(pile);
+			n--;
+		}
+	}
+	else
+	{
+		while (n)
+		{
+			rrb(pile);
+			n--;
+		}
+	}
+	return (0);
+}
+
 void	init_f(int *f)
 {
 	f[0] = -1;
@@ -139,16 +160,63 @@ void	init_f(int *f)
 	f[3] = -1;
 }
 
-int		push
 
+
+void	push0(t_pile *pile_a, t_pile *pile_b, int n)
+{
+	if (n != 0)
+		multi_r_pile(pile_b, n, 'b');
+	pb(pile_a, pile_b);
+}
+
+void	push1(t_pile *pile_a, t_pile *pile_b, int n)
+{
+	if (n != 0)
+		multi_rr_pile(pile_b, n, 'b');
+	pb(pile_a, pile_b);
+}
+
+void	push2(t_pile *pile_a, t_pile *pile_b, int n)
+{
+	ra(pile_a);
+	if (n != 0)
+		multi_r_pile(pile_b, n, 'b');
+	pb(pile_a, pile_b);
+}
+
+void		push3(t_pile *pile_a, t_pile *pile_b, int n)
+{
+	ra(pile_a);
+	if (n != 0)
+		multi_rr_pile(pile_b, n, 'b');
+	pb(pile_a, pile_b);
+}
+
+void	behavior(t_pile *pile_a, t_pile *pile_b, int *f)
+{
+	int n;
+
+	n = which_behavior(f);
+	if (n == 0)
+		push0(pile_a, pile_b, f[0]);
+	else if (n == 1)
+	push1(pile_a, pile_b, f[1]);
+	else if (n == 2)
+	push2(pile_a, pile_b, f[2]);
+	else
+	push3(pile_a, pile_b, f[3]);
+
+}
 int		solve(t_pile *pile_a, t_pile *pile_b)
 {
 	int	f[4];
-
 	init_f(f);
 	find_path(pile_a, pile_b, f);
-	ft_printf("f0:%d f1:%d f2:%d f3:%d ",f[0], f[1], f[2], f[3]);
+//	ft_printf("f0:%d f1:%d f2:%d f3:%d ",f[0], f[1], f[2], f[3]);
 //	push(pile_a, pile_b, which_behavior(f));
-ft_printf("behaviour: %d \n", which_behavior(f));
+//	ft_printf("behaviour: %d \n", which_behavior(f));
+	behavior(pile_a, pile_b, f);
+//	rev_aff_pile(pile_a);
+//	rev_aff_pile(pile_b);
 	return (0);
 }
