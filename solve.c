@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:43:49 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 18:44:41 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/18 19:24:24 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,22 @@ int		chr_forward(int data, t_pile *pile)
 	i = 0;
 	if (tmp->next != NULL)
 	{
-		if (data > pile->max && (tmp->data == pile->max))// || pile->last->data == pile->max))
+		if (data > tmp->data && data < pile->last->data)// || pile->last->data == pile->max))
 			return (0);
-		if (data < pile->min && (tmp->data == pile->min))// || pile->last->data == pile->min))
-			return (0);
+/*		if (data > pile->min && (tmp->data == pile->min))// || pile->last->data == pile->min))
+			return (0);*/
 //					ft_putstr(">>TEST<<");
 		tmp = tmp->next;
 		while (tmp)
 		{
 			i++;
-			if (tmp->prev->data < data && data < tmp->data)
+			if (tmp->prev->data > data && data > tmp->data)
 				break;
-			if (tmp->prev->data == pile->max && data < tmp->data)
+			if (tmp->prev->data == pile->max && data > tmp->data)
 				break;
 			if (tmp->next == NULL)
 			{
-				if (data > tmp->data)
+				if (data < tmp->data)
 					return (i);
 				i = -1;
 				break;
@@ -69,19 +69,19 @@ int		chr_back(int data, t_pile *pile)
 	i = 1;
 	if (tmp->prev != NULL)
 	{
-		if (data > pile->max && (tmp->data == pile->max))// || pile->beg->data == pile->max))
+		if (data < pile->max && (tmp->data == pile->max))// || pile->beg->data == pile->max))
 			return (1);
-		if (data < pile->min && (tmp->data == pile->min))// || pile->beg->data == pile->min))
+		if (data > pile->min && (tmp->data == pile->min))// || pile->beg->data == pile->min))
 			return (1);
 		tmp = tmp->prev;
 		while (tmp)
 		{
 			i++;
-			if (tmp->data < data && data < tmp->next->data)
+			if (tmp->data > data && data > tmp->next->data)
 				break;
 			if (tmp->prev == NULL)
 			{
-				if (data < tmp->data)
+				if (data > tmp->data)
 					return (--i);
 				i = -1;
 				break;
