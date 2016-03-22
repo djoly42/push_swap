@@ -41,7 +41,7 @@ void    ss(t_pile *pile_a, t_pile *pile_b)
 void    pb(t_pile *pile_a, t_pile *pile_b)
 {
 	t_node  *tmp;
-
+//	pile_a->size = pile_a->size + 1;
 	if (pile_a->beg == NULL)
 		return ;
 	tmp = pile_a->beg;
@@ -65,6 +65,8 @@ void    pb(t_pile *pile_a, t_pile *pile_b)
 		tmp->prev = NULL;
 		pile_b->beg = tmp;
 		pile_b->last = tmp;
+		pile_b->max = tmp->data;
+		pile_b->min = tmp->data;
 	}
 	if (tmp->data > pile_b->max)
 		pile_b->max = tmp->data;
@@ -77,7 +79,7 @@ void    pb(t_pile *pile_a, t_pile *pile_b)
 void    pa(t_pile *pile_a, t_pile *pile_b)
 {
 	t_node  *tmp;
-	//ft_putstr("STR");
+//	pile_a->size = pile_a->size + 1;
 	if (pile_b->beg == NULL)
 	{
 		//ft_putstr("RETURN");
@@ -155,6 +157,7 @@ void    pa(t_pile *pile_a, t_pile *pile_b)
 
 void    ra(t_pile *pile_a)
 {
+//	pile_a->size = pile_a->size + 1;
 	t_node  *tmp;
 	tmp = pile_a->beg;
 	pile_a->beg = pile_a->beg->next;
@@ -169,6 +172,7 @@ void    ra(t_pile *pile_a)
 
 void    rb(t_pile *pile_b)
 {
+//	pile_b->size = pile_b->size + 1;
 	t_node  *tmp;
 	tmp = pile_b->beg;
 	pile_b->beg = pile_b->beg->next;
@@ -189,6 +193,7 @@ void    rr(t_pile *pile_a, t_pile *pile_b)
 
 void    rra(t_pile *pile_a)
 {
+//	pile_a->size = pile_a->size + 1;
 	t_node  *tmp;
 	tmp = pile_a->last;
 	pile_a->last = pile_a->last->prev;
@@ -203,6 +208,7 @@ void    rra(t_pile *pile_a)
 
 void    rrb(t_pile *pile_b)
 {
+//	pile_b->size = pile_b->size + 1;
 	t_node  *tmp;
 	tmp = pile_b->last;
 	pile_b->last = pile_b->last->prev;

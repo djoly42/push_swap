@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:14 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 16:49:04 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/22 11:45:33 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_pile_null(t_pile *pile)
 {
 	pile->beg = NULL;
 	pile->last = NULL;
+	//pile->size = 0;
 }
 
 void    init_a(t_pile *pile_a, char **av, int nb)
@@ -48,6 +49,7 @@ void    init_a(t_pile *pile_a, char **av, int nb)
 	}
 	tmp2->next = NULL;
 	pile_a->last = tmp2;
+	//pile_a->size = 0;
 }
 
 void	aff_pile(t_pile *pile)

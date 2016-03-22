@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:57:48 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/18 18:13:34 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/22 11:38:15 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ struct  s_node
     t_node  *prev;
     t_node  *next;
     int     data;
+	int		size;
 int     index;
 };
 
@@ -55,6 +56,8 @@ int		chrmax_forward(int data, t_pile *pile);
 int		chrmin_forward(int data, t_pile *pile);
 int		chrmax_back(int data, t_pile *pile);
 int		chrmin_back(int data, t_pile *pile);
+int		which_behavior(int f[]);
+int		find_path(t_pile *pile_a,t_pile *pile_b,int *f);
 
 /*
 typedef struct  s_env t_env;
