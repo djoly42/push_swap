@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 10:59:24 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/22 17:07:52 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/22 17:15:20 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int		which_behavior(int f[])
 	ret = 0;
 	i = 1;
 	j = 0;
-	while(i < 12)
+	while(i < 16)
 	{
 
 		if(f[i] == -1)
@@ -144,7 +144,7 @@ int		find_path(t_pile *pile_a,t_pile *pile_b,int *f)
 	f[1] = chr_back(pile_a->beg->data, pile_b);
 	f[2] = chr_forward(pile_a->last->data, pile_b);
 	f[3] = chr_back(pile_a->last->data, pile_b);
-	while (i < 12)
+	while (i < 16)
 	{
 		if (tmp->next)
 		{

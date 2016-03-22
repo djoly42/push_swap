@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:43:49 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/22 17:07:40 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/22 17:20:53 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,10 @@ void	init_f(int *f)
 	int		i;
 
 	i = 0;
-	while (i < 12)
+	while (i < 16)
 	{
-		*f = -1;
+		f[i] = -1;
 		i++;
-		f++;
 	}
 }
 
@@ -169,6 +168,49 @@ void		push11(t_pile *pile_a, t_pile *pile_b, int n)
 	pb(pile_a, pile_b);
 }
 
+void	push12(t_pile *pile_a, t_pile *pile_b, int n)
+{
+	ra(pile_a);
+	ra(pile_a);
+	ra(pile_a);
+	if (n != 0)
+		multi_r_pile(pile_b, n, 'b');
+	pb(pile_a, pile_b);
+}
+
+void	push13(t_pile *pile_a, t_pile *pile_b, int n)
+{
+	ra(pile_a);
+	ra(pile_a);
+	ra(pile_a);
+	if (n != 0)
+		multi_rr_pile(pile_b, n, 'b');
+	pb(pile_a, pile_b);
+}
+
+void	push14(t_pile *pile_a, t_pile *pile_b, int n)
+{
+	rra(pile_a);
+	rra(pile_a);
+	rra(pile_a);
+	rra(pile_a);
+	if (n != 0)
+		multi_r_pile(pile_b, n, 'b');
+	pb(pile_a, pile_b);
+}
+
+void		push15(t_pile *pile_a, t_pile *pile_b, int n)
+{
+	rra(pile_a);
+	rra(pile_a);
+	rra(pile_a);
+	rra(pile_a);
+	if (n != 0)
+		multi_rr_pile(pile_b, n, 'b');
+	pb(pile_a, pile_b);
+}
+
+
 void	behavior(t_pile *pile_a, t_pile *pile_b, int *f)
 {
 	int		n;
@@ -202,10 +244,18 @@ void	behavior(t_pile *pile_a, t_pile *pile_b, int *f)
 		push10(pile_a, pile_b, f[10]);
 	else if (n == 11)
 		push11(pile_a, pile_b, f[11]);
+	else if (n == 12)
+		push12(pile_a, pile_b, f[12]);
+	else if (n == 13)
+		push13(pile_a, pile_b, f[13]);
+	else if (n == 14)
+		push14(pile_a, pile_b, f[14]);
+	else if (n == 15)
+		push15(pile_a, pile_b, f[15]);
 }
 int		solve(t_pile *pile_a, t_pile *pile_b)
 {
-	int		f[12];
+	int		f[16];
 	int		i = 0;
 	init_f(f);
 	find_path(pile_a, pile_b, f);
@@ -214,15 +264,16 @@ int		solve(t_pile *pile_a, t_pile *pile_b)
 	rev_aff_pile(pile_a);
 	ft_printf("\npile_b:");
 	rev_aff_pile(pile_b);
-	*/
-	ft_putstr("");
-	while (i < 12)
+
+	ft_putstr("\n");
+*/
+	while (i < 16)
 	{
 		printf("f[%d]:%d ", i, f[i]);
 i++;
 }
 couleur("34");
-	printf(" >>%d<<", which_behavior(f));
+	printf(" >>%d<<\n", which_behavior(f));
 	couleur("0");
 
 	behavior(pile_a, pile_b, f);
