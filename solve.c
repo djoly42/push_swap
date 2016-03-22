@@ -6,12 +6,11 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:43:49 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/22 12:57:22 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/22 13:16:05 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Includes/push_swap.h"
-
 
 int		multi_r_pile(t_pile *pile, int n, char p)
 {

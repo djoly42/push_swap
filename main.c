@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:26 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/22 13:02:43 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/22 13:17:00 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,32 +65,7 @@ int		chrmin_forward(int data, t_pile *pile)
 }
 
 
-int		chrmax_forward(int data, t_pile *pile)
-{
-	int	i;
-	t_node	*tmp;
 
-	if (pile->beg == NULL)
-		return (0);
-	tmp = pile->beg;
-	i = 0;
-	if (tmp->next != NULL)
-	{
-		if (data == tmp->data)
-			return (i);
-		tmp = tmp->next;
-		while (tmp)
-		{
-			i++;
-			if (data == tmp->data)
-				break;
-			if (tmp->next == NULL)
-					return (-1);
-			tmp = tmp->next;
-		}
-	}
-	return (i);
-}
 
 int		chrmin_back(int data, t_pile *pile)
 {
@@ -114,6 +89,33 @@ int		chrmin_back(int data, t_pile *pile)
 			if (tmp->prev == NULL)
 					return (-1);
 			tmp = tmp->prev;
+		}
+	}
+	return (i);
+}
+
+int		chrmax_forward(int data, t_pile *pile)
+{
+	int	i;
+	t_node	*tmp;
+
+	if (pile->beg == NULL)
+		return (0);
+	tmp = pile->beg;
+	i = 0;
+	if (tmp->next != NULL)
+	{
+		if (data == tmp->data)
+			return (i);
+		tmp = tmp->next;
+		while (tmp)
+		{
+			i++;
+			if (data == tmp->data)
+				break;
+			if (tmp->next == NULL)
+					return (-1);
+			tmp = tmp->next;
 		}
 	}
 	return (i);
@@ -143,7 +145,7 @@ int		chrmax_back(int data, t_pile *pile)
 			tmp = tmp->prev;
 		}
 	}
-	return (i);
+	return (++i);
 }
 
 void	min_first(t_pile *pile_a, t_pile *pile_b)

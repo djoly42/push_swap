@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 10:59:24 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/22 13:10:46 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/22 13:16:07 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int		which_behavior(int f[])
 		}
 		i++;
 	}
-	return (ret);
+	return (ret)
 }
 
 int		find_path(t_pile *pile_a,t_pile *pile_b,int *f)
