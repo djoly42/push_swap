@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:26 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/22 13:17:00 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/22 15:59:59 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,9 +159,9 @@ void	min_first(t_pile *pile_a, t_pile *pile_b)
 	b = chrmax_back(pile_b->max, pile_b);
 	ft_printf("\na:%d b:%d\n", a, b);
 	if (a < b)
-		multi_r_pile(pile_b, ++a, 'b');
+		multi_r_pile(pile_b, a, 'b');
 	else
-		multi_rr_pile(pile_b, ++b, 'b');
+		multi_rr_pile(pile_b, b, 'b');
 //	tmp = pile_b->beg;
 	while (pile_b->beg)
 		pa(pile_a, pile_b);
@@ -181,7 +181,8 @@ int     main(int argc, char **argv)
 
 	pile_a.size = 0;
 	pile_b.size = 0;
-
+		ft_putstr("\npile a:");
+		aff_pile(&pile_a);
 	while (pile_a.beg != NULL)
 	{
 		solve(&pile_a, &pile_b);

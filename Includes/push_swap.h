@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:57:48 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/22 11:38:15 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/22 15:46:29 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # define PUSH_SWAP
 # include "ft_printf.h"
 # include <stdlib.h>
+//#include "couleurs.h" 
+#define couleur(param) printf("\033[%sm",param)
+
 
 typedef struct  s_node t_node;
 struct  s_node
