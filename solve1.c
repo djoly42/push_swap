@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 10:59:24 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/23 12:41:26 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/23 13:00:05 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 int		chr_forward(int data, t_pile *pile)
 {
-	int	i;
+	int		i;
 	t_node	*tmp;
-	if (pile->beg == NULL)
-		return (0);
-	if (pile->beg == pile->last)
+
+	tmp = pile->beg;
+	if ((pile->beg == NULL) || (pile->beg == pile->last)||
+	(data > tmp->data && data < pile->last->data))
 		return (0);
 	if (data > pile->max)
 		return (chrmax_forward(pile->max, pile));
 	if (data < pile->min)
 		return (chrmin_forward(pile->min, pile));
-	tmp = pile->beg;
-	if (data > tmp->data && data < pile->last->data)
-		return (0);
 	i = 0;
 	if (tmp->next != NULL)
 	{
@@ -34,20 +32,9 @@ int		chr_forward(int data, t_pile *pile)
 		while (tmp)
 		{
 			i++;
-			if (tmp->prev->data > data && data > tmp->data)
+			if ((tmp->prev->data > data && data > tmp->data) ||(
+				tmp->prev->data == pile->max && data > tmp->data))
 				break;
-			if (tmp->prev->data == pile->max && data > tmp->data)
-				break;
-/*			if (tmp->next == NULL)
-			{
-				couleur("31");
-				printf("     >>LOVE<<        ");
-				couleur("0");
-				if (data < tmp->data)
-					return (i);
-				i = -1;
-				break;
-			}*/
 			tmp = tmp->next;
 		}
 	}
@@ -59,23 +46,21 @@ int		chr_back(int data, t_pile *pile)
 	int	i;
 	t_node	*tmp;
 
-	if (pile->beg == NULL)
+	tmp = pile->last;
+	if (pile->beg == NULL ||
+		(data > pile->beg->data && data < pile->last->data))
 		return (0);
 	if (data > pile->max)
 		return (chrmax_back(pile->max, pile));
 	if (data < pile->min)
 		return (chrmin_back(pile->min, pile));
-
-	tmp = pile->last;
-//	tmp = pile->beg;
-	if (data > pile->beg->data && data < pile->last->data)
-		return (0);
+//	if (data > pile->beg->data && data < pile->last->data)
+//		return (0);
 	i = 1;
 	if (tmp->prev != NULL)
 	{
-		if (data > pile->max && (tmp->data == pile->max))// || pile->beg->data == pile->max))
-			return (1);
-		if (data < pile->min && (tmp->data == pile->min))// || pile->beg->data == pile->min))
+		if ((data > pile->max && (tmp->data == pile->max)) ||
+		(data < pile->min && (tmp->data == pile->min)))
 			return (1);
 		tmp = tmp->prev;
 		while (tmp)

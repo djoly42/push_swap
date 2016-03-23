@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:43:49 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/23 12:33:32 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/23 13:01:27 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,9 +286,9 @@ void	init_f(int *f)
 
 int		solve(t_pile *pile_a, t_pile *pile_b)
 {
-	int		f[TAB];
+	 int		f[TAB];
 //	int		i = 0;
-int a;
+	int a;
 	init_f(f);
 	find_path(pile_a, pile_b, f);
 /*
