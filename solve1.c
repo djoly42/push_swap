@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 10:59:24 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/23 13:00:05 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/23 13:42:44 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,15 @@ int		chr_back(int data, t_pile *pile)
 		return (chrmax_back(pile->max, pile));
 	if (data < pile->min)
 		return (chrmin_back(pile->min, pile));
-//	if (data > pile->beg->data && data < pile->last->data)
-//		return (0);
 	i = 1;
 	if (tmp->prev != NULL)
 	{
-		if ((data > pile->max && (tmp->data == pile->max)) ||
-		(data < pile->min && (tmp->data == pile->min)))
-			return (1);
 		tmp = tmp->prev;
 		while (tmp)
 		{
 			i++;
 			if (tmp->data > data && data > tmp->next->data)
 				break;
-/*			if (tmp->prev == NULL)
-			{
-				couleur("31");
-				printf("      >>HATE<<         ");
-				couleur("0");
-				if (data > tmp->data)
-					return (--i);
-				i = -1;
-				break;
-			}*/
 			tmp = tmp->prev;
 		}
 	}

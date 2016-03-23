@@ -9,7 +9,7 @@ LIB = Lib/libftprintf.a
 
 HEAD = Includes/
 
-SRC = test.c main.c tools.c init.c solve.c solve1.c
+SRC = init.c init2.c main.c solve.c solve1.c solve2.c test.c tools.c tools2.c
 
 OBJ = $(SRC:.c=.o)
 

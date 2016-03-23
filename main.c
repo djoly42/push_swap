@@ -6,36 +6,13 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:26 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/23 12:15:14 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/23 21:07:03 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "Includes/push_swap.h"
-/*
-void    init_a(t_pile *pile_a, char *av, int nb)
-{
-	int i;
-	t_node  *tmp;
-	tmp = (t_node*)malloc(sizeof(t_node));
-	pile_a->size = nb;
-	tmp->data = av[1];
-	tmp->index = 0;
-	tmp->prev = NULL;
-	tmp->next = NULL;
-	pile_a->beg = tmp;
-	i = 2;
-	while (i < nb)
-	{
-		tmp->next = (t_node*)malloc(sizeof(t_node));
-		tmp->next->data = av[i];
-		tmp->next->index = i;
-		tmp->next->prev = tmp;
-		tmp = tmp->next;
-		i++;
-	}
-	pile_a->last = tmp;
-}*/
+
 
 int		chrmin_forward(int data, t_pile *pile)
 {
@@ -46,13 +23,16 @@ int		chrmin_forward(int data, t_pile *pile)
 		return (0);
 	tmp = pile->beg;
 	i = 0;
-	if (tmp->next != NULL)
-	{
+//	if (tmp->next != NULL)
+//	{
 		if (data == tmp->data)
 			return (++i);
+		if (tmp->next == NULL)
+			return (-1);
 		tmp = tmp->next;
 		while (tmp)
 		{
+		//	ft_putstr("pile a:");
 			i++;
 			if (data == tmp->data)
 				break;
@@ -60,7 +40,7 @@ int		chrmin_forward(int data, t_pile *pile)
 					return (-1);
 			tmp = tmp->next;
 		}
-	}
+	//}
 	return (++i);
 }
 
@@ -148,26 +128,32 @@ int		chrmax_back(int data, t_pile *pile)
 	return (++i);
 }
 
-void	min_first(t_pile *pile_a, t_pile *pile_b)
+void	min_first(t_2pile *pile)
 {
 //	t_node	*tmp;
 	int		a;
 	int		b;
 
 
-	a = chrmax_forward(pile_b->max, pile_b);
-	b = chrmax_back(pile_b->max, pile_b);
-	ft_printf("\na:%d b:%d\n", a, b);
+	a = chrmax_forward(pile->pile_b.max, &pile->pile_b);
+	b = chrmax_back(pile->pile_b.max, &pile->pile_b);
+//	ft_printf("\na:%d b:%d\n", a, b);
 	if (a < b)
-		multi_r_pile(pile_b, a, 'b');
+		multi_r_pile(pile, a, 'b');
 	else
-		multi_rr_pile(pile_b, b, 'b');
+		multi_rr_pile(pile, b, 'b');
 //	tmp = pile_b->beg;
-	while (pile_b->beg)
-		pa(pile_a, pile_b);
+	while (pile->pile_b.beg)
+	{
+		pile->ret_mv += pa(&pile->pile_a, &pile->pile_b);
+		if (pile->print_all)
+			ft_putstr("pa");
+		if(pile->pile_b.beg != NULL)
+			ft_putstr(" ");
+	}
 }
 
-void	is_tri(t_pile *pile)
+int	is_tri(t_pile *pile)
 {
 	t_node	*tmp;
 
@@ -175,13 +161,11 @@ void	is_tri(t_pile *pile)
 	while (tmp)
 	{
 		if (tmp->data < tmp->prev->data)
-		{
-			ft_printf("\033[34m>>ERROR>>%d<<\n\x1B[0m", tmp->data);
-			return ;
-		}
+			return (0);
 		tmp = tmp->next;
 	}
 ft_printf("\033[35m>>>Pile triee<<<\n\x1B[0m");
+	return (1);
 }
 
 int	is_tri2(t_pile *pile)
@@ -204,44 +188,53 @@ int	is_tri2(t_pile *pile)
 		tmp = tmp->next;
 	}
 ft_printf("\033[35m>>>Pile triee<<<\n\x1B[0m");
-return (1);
+	return (1);
 }
 
 int     main(int argc, char **argv)
 {
-	t_pile  pile_a;
-	t_pile  pile_b;
+//	t_pile  pile_a;
+//	t_pile  pile_b;
+	t_2pile	pile;
 
-	if (argc == 1)
-		return (0);
-	init_a(&pile_a, argv, (argc - 1));
-	init_pile_null(&pile_b);
-//	pb(&pile_a, &pile_b);
-//	pb(&pile_a, &pile_b);
-//	pb(&pile_a, &pile_b);
+	init_2pile(&pile);
 
-	pile_a.size = 0;
-	pile_b.size = 0;
-		ft_putstr("\npile a:");
-		aff_pile(&pile_a);
-	while (pile_a.beg != NULL)
+	if (init_a(&pile, argv, (argc - 1)))// un parametre -bonus ?
 	{
-		solve(&pile_a, &pile_b);
-	//	ft_putnbr((pile_a.size + pile_b.size));
-	//	ft_putchar('\n');
+		ft_putstr("Error\n");
+		return (0);
 	}
-	//	rev_aff_pile(&pile_a);
-	min_first(&pile_a, &pile_b);
-	ft_printf("nb =%d ", (pile_a.size + pile_b.size));
+	if (argc == 1) // un parametre -bonus ?
+		return (0);
+	init_pile_null(&pile.pile_b);
+	if (is_tri(&pile.pile_a))
+		return (0);
+	if (basic_test(&pile) == 1)
+	{
+		reverse_pile1(&pile);
+		if (pile.pile_a.beg->data > pile.pile_a.beg->next->data)
+		pile.ret_mv += sa(&pile.pile_a);
+
+	}
+	else
+	{
+		if (pile.pile_a.size > 6)
+	{
+	while (pile.pile_a.beg != NULL)
+		solve(&pile);
+	}
+	else
+	{
+		solve2(&pile);
+	}
+}
+	min_first(&pile);
+	ft_printf("\033[95mnb=%d error=%d v=%d c=%d w=%d size=%d\x1B[0m", pile.ret_mv, pile.error, pile.v,
+	pile.c, pile.w, pile.pile_a.size);
+
 	ft_putstr("\npile a:");
-	rev_aff_pile(&pile_a);
-	is_tri(&pile_a);
-/*	ft_putstr("\npile b:");
-	rev_aff_pile(&pile_b);*/
-//	ft_putstr("\npile a:");/
-//	aff_pile(&pile_a);
-//	ft_putstr("\npile b:");
-//	aff_pile(&pile_b);
-	//test(&pile_a, &pile_b);
+	rev_aff_pile(&pile.pile_a);
+	is_tri(&pile.pile_a);
+
 	return (0);
 }

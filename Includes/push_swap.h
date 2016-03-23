@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:57:48 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/23 12:38:03 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/23 21:06:05 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ struct  s_node
     t_node  *prev;
     t_node  *next;
     int     data;
-	int		size;
-int     index;
+	int     index;
 };
 
 typedef struct  s_pile t_pile;
@@ -41,29 +40,50 @@ struct  s_pile
 	int		max;
 };
 
-void    pb(t_pile *pile_a, t_pile *pile_b);
-void    pa(t_pile *pile_a, t_pile *pile_b);
-void    rb(t_pile *pile_b);
-void    ra(t_pile *pile_a);
-void    rra(t_pile *pile_a);
-void    rrb(t_pile *pile_b);
-void    init_a(t_pile *pile_a, char **av, int nb);
-void	init_pile_null(t_pile *pile);
+typedef struct  s_2pile t_2pile;
+struct  s_2pile
+{
+	int		v;
+	int		c;
+	int		w;
+	int		error;
+	int		print_all;
+	int		ret_mv;
+	t_pile	pile_a;
+	t_pile	pile_b;
+};
+
+int		pb(t_pile *pile_a, t_pile *pile_b);
+int		pa(t_pile *pile_a, t_pile *pile_b);
+int		rb(t_pile *pile_b);
+int		ra(t_pile *pile_a);
+int		rra(t_pile *pile_a);
+int		rrb(t_pile *pile_b);
+int		sa(t_pile *pile);
+int		sb(t_pile *pile);
 void	aff_pile(t_pile *pile); //
-void	rev_aff_pile(t_pile *pile); //
-void	test(t_pile *pile_a, t_pile *pile_b);
-void	rev_test(t_pile *pile_a, t_pile *pile_b);
-int		solve(t_pile *pile_a, t_pile *pile_b);
-int		multi_r_pile(t_pile *pile, int n, char p);
-int		multi_rr_pile(t_pile *pile, int n, char p);
+int		basic_test(t_2pile *pile);
 int		chrmax_forward(int data, t_pile *pile);
 int		chrmin_forward(int data, t_pile *pile);
 int		chrmax_back(int data, t_pile *pile);
 int		chrmin_back(int data, t_pile *pile);
-int		which_behavior(int f[]);
 int		find_path(t_pile *pile_a,t_pile *pile_b,int *f);
-void	is_tri(t_pile *pile);
+int	    init_a(t_2pile *pile, char **av, int nb);
+void	init_pile_null(t_pile *pile);
+void	init_2pile(t_2pile *pile);
+int 	is_tri(t_pile *pile);
 int		is_tri2(t_pile *pile);
+void	multi_r_pile(t_2pile *pile, int n, char p);
+void	multi_rr_pile(t_2pile *pile, int n, char p);
+int		not_valid(t_2pile *pile, char *str);
+int		reverse_pile1(&pile);
+void	rev_test(t_pile *pile_a, t_pile *pile_b);
+void	rev_aff_pile(t_pile *pile); //
+int		solve(t_2pile *pile);
+int		solve2(t_2pile *pile);
+void	test(t_pile *pile_a, t_pile *pile_b);
+int		which_behavior(int f[]);
+
 
 /*
 typedef struct  s_env t_env;
