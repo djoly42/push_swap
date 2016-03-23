@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:26 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/22 17:29:32 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/23 12:15:14 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void	min_first(t_pile *pile_a, t_pile *pile_b)
 	while (pile_b->beg)
 		pa(pile_a, pile_b);
 }
+
 void	is_tri(t_pile *pile)
 {
 	t_node	*tmp;
@@ -175,14 +176,37 @@ void	is_tri(t_pile *pile)
 	{
 		if (tmp->data < tmp->prev->data)
 		{
-			ft_printf(">>ERROR<< non triee\n");
+			ft_printf("\033[34m>>ERROR>>%d<<\n\x1B[0m", tmp->data);
 			return ;
 		}
 		tmp = tmp->next;
 	}
-ft_printf(">>>Pile triee<<<\n");
-
+ft_printf("\033[35m>>>Pile triee<<<\n\x1B[0m");
 }
+
+int	is_tri2(t_pile *pile)
+{
+	t_node	*tmp;
+
+	tmp = pile->beg->next;
+	while (tmp)
+	{
+		if (tmp->data > tmp->prev->data)
+		{
+			if (tmp->data != pile->max)
+			{
+				ft_printf("\033[34m>>ERROR<<\x1B[0m");
+
+				return (0);
+
+			}
+		}
+		tmp = tmp->next;
+	}
+ft_printf("\033[35m>>>Pile triee<<<\n\x1B[0m");
+return (1);
+}
+
 int     main(int argc, char **argv)
 {
 	t_pile  pile_a;
@@ -207,9 +231,6 @@ int     main(int argc, char **argv)
 	//	ft_putchar('\n');
 	}
 	//	rev_aff_pile(&pile_a);
-		ft_printf("\navant min first:");
-		rev_aff_pile(&pile_b);
-		ft_printf("\n");
 	min_first(&pile_a, &pile_b);
 	ft_printf("nb =%d ", (pile_a.size + pile_b.size));
 	ft_putstr("\npile a:");

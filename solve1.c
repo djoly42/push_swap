@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 10:59:24 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/22 17:15:20 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/23 12:41:26 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		chr_forward(int data, t_pile *pile)
 				break;
 			if (tmp->prev->data == pile->max && data > tmp->data)
 				break;
-			if (tmp->next == NULL)
+/*			if (tmp->next == NULL)
 			{
 				couleur("31");
 				printf("     >>LOVE<<        ");
@@ -47,7 +47,7 @@ int		chr_forward(int data, t_pile *pile)
 					return (i);
 				i = -1;
 				break;
-			}
+			}*/
 			tmp = tmp->next;
 		}
 	}
@@ -83,7 +83,7 @@ int		chr_back(int data, t_pile *pile)
 			i++;
 			if (tmp->data > data && data > tmp->next->data)
 				break;
-			if (tmp->prev == NULL)
+/*			if (tmp->prev == NULL)
 			{
 				couleur("31");
 				printf("      >>HATE<<         ");
@@ -92,7 +92,7 @@ int		chr_back(int data, t_pile *pile)
 					return (--i);
 				i = -1;
 				break;
-			}
+			}*/
 			tmp = tmp->prev;
 		}
 	}
@@ -108,7 +108,7 @@ int		which_behavior(int f[])
 	ret = 0;
 	i = 1;
 	j = 0;
-	while(i < 16)
+	while(i < TAB)
 	{
 
 		if(f[i] == -1)
@@ -144,10 +144,13 @@ int		find_path(t_pile *pile_a,t_pile *pile_b,int *f)
 	f[1] = chr_back(pile_a->beg->data, pile_b);
 	f[2] = chr_forward(pile_a->last->data, pile_b);
 	f[3] = chr_back(pile_a->last->data, pile_b);
-	while (i < 16)
+	while (i < TAB)
 	{
+
 		if (tmp->next)
 		{
+		//	if (i == 32)
+		//		ft_printf("\033[95mDATA>>%d<<\x1B[0m", tmp->next->data);
 			f[i] = chr_forward(tmp->next->data, pile_b);
 			f[i + 1] = chr_back(tmp->next->data, pile_b);
 			tmp = tmp->next;
