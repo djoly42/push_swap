@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:14 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/23 19:05:55 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/24 22:37:43 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int    init_a(t_2pile *pile, char **av, int nb)
 		if (a == 1)
 			return (1);
 		else if (a == 2)
-			i++;
+		i++;
+		//	nb;
+	if (nb == 0)
+		return (1);
 	}
 	tmp->data = ft_atoi(av[i]);
 	pile->pile_a.min = tmp->data;
@@ -102,11 +105,10 @@ int    init_a(t_2pile *pile, char **av, int nb)
 		tmp->next->prev = tmp;
 		tmp2 = tmp->next;
 		tmp = tmp->next;
-
 	}
 		i++;
 	}
-	if (i == 2)
+	if (pile->pile_a.size == 1)
 	{
 		tmp->next = NULL;
 		pile->pile_a.last = tmp;
@@ -116,6 +118,7 @@ int    init_a(t_2pile *pile, char **av, int nb)
 	tmp2->next = NULL;
 	pile->pile_a.last = tmp2;
 }
+
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:43:49 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/23 15:10:18 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/24 21:11:11 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void		multi_r_pile(t_2pile *pile, int n, char p)
 		while (n)
 		{
 			pile->ret_mv += ra(&pile->pile_a);
-			if (pile->print_all)
-				ft_putstr("ra ");
+			print(pile, 5);
 			n--;
 		}
 	}
@@ -29,8 +28,7 @@ void		multi_r_pile(t_2pile *pile, int n, char p)
 		while (n)
 		{
 			pile->ret_mv += rb(&pile->pile_b);
-			if (pile->print_all)
-				ft_putstr("rb ");
+			print(pile, 6);
 			n--;
 		}
 	}
@@ -43,8 +41,7 @@ void		multi_rr_pile(t_2pile *pile, int n, char p)
 		while (n)
 		{
 			pile->ret_mv += rra(&pile->pile_a);
-			if (pile->print_all)
-				ft_putstr("rra ");
+			print(pile, 7);
 			n--;
 		}
 	}
@@ -53,8 +50,7 @@ void		multi_rr_pile(t_2pile *pile, int n, char p)
 		while (n)
 		{
 			pile->ret_mv += rrb(&pile->pile_b);
-			if (pile->print_all)
-				ft_putstr("rrb ");
+			print(pile, 8);
 			n--;
 		}
 	}
@@ -65,8 +61,7 @@ void		push0(t_2pile *pile, int n)
 	if (n != 0)
 		multi_r_pile(pile, n, 'b');
 	pile->ret_mv += pb(&pile->pile_a, &pile->pile_b);
-	if (pile->print_all)
-		ft_putstr("pb ");
+	print(pile, 2);
 }
 
 void		push1(t_2pile *pile, int n)
@@ -74,8 +69,7 @@ void		push1(t_2pile *pile, int n)
 	if (n != 0)
 		multi_rr_pile(pile, n, 'b');
 	pile->ret_mv += pb(&pile->pile_a, &pile->pile_b);
-	if (pile->print_all)
-		ft_putstr("pb ");
+	print(pile, 2);
 }
 
 void	behavior(t_2pile *pile, int *f)
@@ -108,14 +102,12 @@ void	behavior(t_2pile *pile, int *f)
 		if (m % 4 < 2)
 		{
 			pile->ret_mv += rra(&pile->pile_a);
-			if (pile->print_all)
-				ft_putstr("rra ");
+			print(pile, 7);
 		}
 		else
 		{
 			pile->ret_mv += ra(&pile->pile_a);
-			if (pile->print_all)
-				ft_putstr("ra ");
+			print(pile, 5);
 		}
 		m = m - 4;
 	}

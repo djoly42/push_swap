@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:57:48 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/23 21:06:05 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/24 21:22:19 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # define PUSH_SWAP
 # include "ft_printf.h"
 # include <stdlib.h>
-//#include "couleurs.h"
-#define couleur(param) printf("\033[%sm",param)
-#define couleur2(param) printf("\x1B[%sm",param)
 #define TAB 200
 
 typedef struct  s_node t_node;
@@ -53,14 +50,14 @@ struct  s_2pile
 	t_pile	pile_b;
 };
 
-int		pb(t_pile *pile_a, t_pile *pile_b);
 int		pa(t_pile *pile_a, t_pile *pile_b);
-int		rb(t_pile *pile_b);
-int		ra(t_pile *pile_a);
-int		rra(t_pile *pile_a);
-int		rrb(t_pile *pile_b);
+int		pb(t_pile *pile_a, t_pile *pile_b);
 int		sa(t_pile *pile);
 int		sb(t_pile *pile);
+int		ra(t_pile *pile_a);
+int		rb(t_pile *pile_b);
+int		rra(t_pile *pile_a);
+int		rrb(t_pile *pile_b);
 void	aff_pile(t_pile *pile); //
 int		basic_test(t_2pile *pile);
 int		chrmax_forward(int data, t_pile *pile);
@@ -76,7 +73,10 @@ int		is_tri2(t_pile *pile);
 void	multi_r_pile(t_2pile *pile, int n, char p);
 void	multi_rr_pile(t_2pile *pile, int n, char p);
 int		not_valid(t_2pile *pile, char *str);
-int		reverse_pile1(t_2pile *pile);
+void	print(t_2pile *pile, int i);
+void	print_last(t_2pile *pile, int i);
+void	print_ret_mv(t_2pile *pile);
+int		reverse_pile(t_2pile *pile);
 void	rev_test(t_pile *pile_a, t_pile *pile_b);
 void	rev_aff_pile(t_pile *pile); //
 int		solve(t_2pile *pile);
