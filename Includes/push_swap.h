@@ -76,7 +76,7 @@ int		is_tri2(t_pile *pile);
 void	multi_r_pile(t_2pile *pile, int n, char p);
 void	multi_rr_pile(t_2pile *pile, int n, char p);
 int		not_valid(t_2pile *pile, char *str);
-int		reverse_pile1(&pile);
+int		reverse_pile1(t_2pile *pile);
 void	rev_test(t_pile *pile_a, t_pile *pile_b);
 void	rev_aff_pile(t_pile *pile); //
 int		solve(t_2pile *pile);

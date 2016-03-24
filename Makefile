@@ -3,7 +3,7 @@ NAME  = push_swap
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = #-Wall -Werror -Wextra
 
 LIB = Lib/libftprintf.a
 

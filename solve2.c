@@ -28,7 +28,14 @@ int		basic_test(t_2pile *pile)
 	return (error);
 }
 
-int		reverse_pile1(t_2pile *pile);
+int		reverse_pile1(t_2pile *pile)
+{
+	int a;
+
+
+
+	return (1);
+}
 
 int		reverse_pile3(t_2pile *pile)
 {

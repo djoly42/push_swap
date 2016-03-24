@@ -196,9 +196,7 @@ int     main(int argc, char **argv)
 //	t_pile  pile_a;
 //	t_pile  pile_b;
 	t_2pile	pile;
-
 	init_2pile(&pile);
-
 	if (init_a(&pile, argv, (argc - 1)))// un parametre -bonus ?
 	{
 		ft_putstr("Error\n");
