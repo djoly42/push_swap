@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:14 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/24 22:37:43 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/24 23:39:32 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,12 @@ void	init_pile_null(t_pile *pile)
 {
 	pile->beg = NULL;
 	pile->last = NULL;
-	//pile->size = 0;
 }
 
 int		already_here(int data, t_node *test)
 {
-	int	i;
+	int		i;
 	t_node	*tmp;
-
 
 	tmp = test;
 	i = 0;
@@ -56,6 +54,27 @@ int		already_here(int data, t_node *test)
 	return (1);
 }
 
+int		init_first(t_2pile *pile, int **tab, char **av, t_node *tmp)
+{
+	*tab[1] = 1;
+	while ((*tab[2] = not_valid(pile, av[*tab[1]])) != 0)
+	{
+		if (*tab[2] == 1)
+			return (1);
+		else if (*tab[2] == 2)
+			(*tab[1])++;
+		if (*tab[0] == 0)
+			return (1);
+	}
+	tmp->data = ft_atoi(av[*tab[1]]);
+	pile->pile_a.min = tmp->data;
+	pile->pile_a.max = tmp->data;
+	pile->pile_a.size += 1;
+	pile->pile_a.beg = tmp;
+	tmp->prev = NULL;
+	(*tab[1])++;
+	return (0);
+}
 
 int    init_a(t_2pile *pile, char **av, int nb)
 {
@@ -63,27 +82,14 @@ int    init_a(t_2pile *pile, char **av, int nb)
 	int	a;
 	t_node  *tmp;
 	t_node  *tmp2;
+	int *tab[3];
 
-	i = 1;
+	tab[0] = &nb;
+	tab[1] = &i;
+	tab[2] = &a;
 	tmp = (t_node*)malloc(sizeof(t_node));
-	while ((a = not_valid(pile, av[i])) != 0)
-	{
-		if (a == 1)
-			return (1);
-		else if (a == 2)
-		i++;
-		//	nb;
-	if (nb == 0)
+	if (init_first(pile, tab, av, tmp))
 		return (1);
-	}
-	tmp->data = ft_atoi(av[i]);
-	pile->pile_a.min = tmp->data;
-	pile->pile_a.max = tmp->data;
-	pile->pile_a.size += 1;
-	pile->pile_a.beg = tmp;
-	tmp->prev = NULL;
-	i++;
-
 	while (i <= nb)
 	{
 		if ((a = not_valid(pile, av[i])) == 1)
@@ -105,7 +111,7 @@ int    init_a(t_2pile *pile, char **av, int nb)
 		tmp->next->prev = tmp;
 		tmp2 = tmp->next;
 		tmp = tmp->next;
-	}
+		}
 		i++;
 	}
 	if (pile->pile_a.size == 1)
@@ -115,17 +121,16 @@ int    init_a(t_2pile *pile, char **av, int nb)
 	}
 	else
 	{
-	tmp2->next = NULL;
-	pile->pile_a.last = tmp2;
-}
-
+		tmp2->next = NULL;
+		pile->pile_a.last = tmp2;
+	}
 	return (0);
 }
 
 void	aff_pile(t_pile *pile)
 {
-	//ft_printf("rev pile: ");
 	t_node	*tmp;
+
 	tmp = pile->beg;
 	if (tmp == NULL)
 		return ;
@@ -134,13 +139,12 @@ void	aff_pile(t_pile *pile)
 		ft_printf("%d ",tmp->data);
 		tmp = tmp->next;
 	}while (tmp);
-//	ft_putchar('\n');
 }
 
 void	rev_aff_pile(t_pile *pile)
 {
-	//ft_printf("pile: ");
 	t_node	*tmp;
+
 	tmp = pile->last;
 	if (tmp == NULL)
 		return ;
@@ -149,6 +153,4 @@ void	rev_aff_pile(t_pile *pile)
 		ft_printf("%d ",tmp->data);
 		tmp = tmp->prev;
 	}while (tmp);
-	ft_printf("\t\tmax:%d min:%d", pile->max, pile->min);
-	//ft_putchar('\n');
 }

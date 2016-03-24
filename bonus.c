@@ -6,11 +6,11 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 18:23:24 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/24 20:43:52 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/24 23:12:28 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"Includes/push_swap.h"
+#include "Includes/push_swap.h"
 
 void	print_pile(t_2pile *pile)
 {
@@ -34,7 +34,7 @@ void	print(t_2pile *pile, int i)
 {
 	if (pile->print_all)
 	{
-		if(i == 1)
+		if (i == 1)
 			ft_putstr("pa ");
 		else if (i == 2)
 			ft_putstr("pb ");
@@ -58,7 +58,7 @@ void	color(t_2pile *pile, int i)
 {
 	if (pile->print_all)
 	{
-		if(i == 1)
+		if (i == 1)
 			ft_putstr("\033[36mpa\n\x1B[0m");
 		else if (i == 2)
 			ft_putstr("\033[35mpb\n\x1B[0m");
@@ -83,7 +83,7 @@ void	print_last(t_2pile *pile, int i)
 		color(pile, i);
 	else if (pile->print_all)
 	{
-		if(i == 1)
+		if (i == 1)
 			ft_putstr("pa\n");
 		else if (i == 2)
 			ft_putstr("pb\n");
