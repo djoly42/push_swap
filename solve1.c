@@ -6,19 +6,19 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 10:59:24 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/23 13:42:44 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/25 12:29:41 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Includes/push_swap.h"
 
-int		chr_forward(int data, t_pile *pile)
+int				chr_forward(int data, t_pile *pile)
 {
 	int		i;
 	t_node	*tmp;
 
 	tmp = pile->beg;
-	if ((pile->beg == NULL) || (pile->beg == pile->last)||
+	if ((pile->beg == NULL) || (pile->beg == pile->last) ||
 	(data > tmp->data && data < pile->last->data))
 		return (0);
 	if (data > pile->max)
@@ -32,18 +32,18 @@ int		chr_forward(int data, t_pile *pile)
 		while (tmp)
 		{
 			i++;
-			if ((tmp->prev->data > data && data > tmp->data) ||(
-				tmp->prev->data == pile->max && data > tmp->data))
-				break;
+			if ((tmp->prev->data > data && data > tmp->data) ||
+				(tmp->prev->data == pile->max && data > tmp->data))
+				break ;
 			tmp = tmp->next;
 		}
 	}
 	return (i);
 }
 
-int		chr_back(int data, t_pile *pile)
+int				chr_back(int data, t_pile *pile)
 {
-	int	i;
+	int		i;
 	t_node	*tmp;
 
 	tmp = pile->last;
@@ -62,14 +62,14 @@ int		chr_back(int data, t_pile *pile)
 		{
 			i++;
 			if (tmp->data > data && data > tmp->next->data)
-				break;
+				break ;
 			tmp = tmp->prev;
 		}
 	}
 	return (--i);
 }
 
-int		which_behavior(int f[])
+int				which_behavior(int f[])
 {
 	int		i;
 	int		ret;
@@ -78,10 +78,9 @@ int		which_behavior(int f[])
 	ret = 0;
 	i = 1;
 	j = 0;
-	while(i < TAB)
+	while (i < TAB)
 	{
-
-		if(f[i] == -1)
+		if (f[i] == -1)
 			return (ret);
 		if (i % 2 == 1)
 		{
@@ -99,40 +98,39 @@ int		which_behavior(int f[])
 	return (ret);
 }
 
-int		find_path(t_pile *pile_a,t_pile *pile_b,int *f)
+static void		in_while(t_pile *pile_b, int *f, t_node *tmp, t_node *tmp2)
+{
+	if (tmp->next)
+	{
+		f[0] = chr_forward(tmp->next->data, pile_b);
+		f[1] = chr_back(tmp->next->data, pile_b);
+		tmp = tmp->next;
+	}
+	if (tmp2->prev)
+	{
+		f[2] = chr_forward(tmp2->prev->data, pile_b);
+		f[3] = chr_back(tmp2->prev->data, pile_b);
+		tmp2 = tmp2->prev;
+	}
+}
+
+int				find_path(t_pile *pile_a, t_pile *pile_b, int *f)
 {
 	int		i;
-	int 	j;
 	t_node	*tmp;
 	t_node	*tmp2;
 
 	tmp = pile_a->beg;
 	tmp2 = pile_a->last;
 	i = 4;
-	j = 1;
 	f[0] = chr_forward(pile_a->beg->data, pile_b);
 	f[1] = chr_back(pile_a->beg->data, pile_b);
 	f[2] = chr_forward(pile_a->last->data, pile_b);
 	f[3] = chr_back(pile_a->last->data, pile_b);
 	while (i < TAB)
 	{
-
-		if (tmp->next)
-		{
-		//	if (i == 32)
-		//		ft_printf("\033[95mDATA>>%d<<\x1B[0m", tmp->next->data);
-			f[i] = chr_forward(tmp->next->data, pile_b);
-			f[i + 1] = chr_back(tmp->next->data, pile_b);
-			tmp = tmp->next;
-		}
-		if (tmp2->prev)
-		{
-			f[i + 2] = chr_forward(tmp2->prev->data, pile_b);
-			f[i + 3] = chr_back(tmp2->prev->data, pile_b);
-			tmp2 = tmp2->prev;
-		}
+		in_while(pile_b, &f[i], tmp, tmp2);
 		i = i + 4;
-		j++;
 	}
 	return (0);
 }

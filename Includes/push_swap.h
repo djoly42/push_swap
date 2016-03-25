@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:57:48 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/24 21:22:19 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/25 12:10:29 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int		not_valid(t_2pile *pile, char *str);
 void	print(t_2pile *pile, int i);
 void	print_last(t_2pile *pile, int i);
 void	print_ret_mv(t_2pile *pile);
+void	push0(t_2pile *pile, int n);
+void	push1(t_2pile *pile, int n);
 int		reverse_pile(t_2pile *pile);
 void	rev_test(t_pile *pile_a, t_pile *pile_b);
 void	rev_aff_pile(t_pile *pile); //

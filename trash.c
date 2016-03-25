@@ -196,3 +196,84 @@ int    init_a(t_2pile *pile, char **av, int nb)
 	}
 	return (0);
 }
+
+
+void	behavior(t_2pile *pile, int *f)
+{
+	int		n;
+	int		m;
+	int		i;
+	int		j;
+
+	n = which_behavior(f);
+	m = n;
+	i = 0;
+	j = 0;
+	if (n == 0)
+		push0(pile, f[0]);
+	else if (n == 1)
+		push1(pile, f[1]);
+	else
+	{
+		while (m >= 0)
+		{
+			if (m == n)
+				m = n - 2;
+			if (m % 4 < 2)
+			{
+				pile->ret_mv += rra(&pile->pile_a);
+				print(pile, 7);
+			}
+			else
+			{
+				pile->ret_mv += ra(&pile->pile_a);
+				print(pile, 5);
+			}
+			m = m - 4;
+		}
+		if (n % 2 == 0)
+			push0(pile, f[n]);
+		else
+			push1(pile, f[n]);
+	}
+}
+int		solve2(t_2pile *pile)
+{
+	int		tab[2];
+	int		i;
+	t_node	*tmp;
+
+	i = 0;
+	tmp = pile->pile_a.beg;
+	while (i < 3)
+	{
+		tab[0] = chrmin_forward(pile->pile_a.min, &pile->pile_a) - 1;
+		tab[1] = chrmin_back(pile->pile_a.min, &pile->pile_a) + 1;
+		if (tab[0] < (tab[1] + 1))
+			multi_r_pile(pile, tab[0], 'a');
+		else
+			multi_rr_pile(pile, tab[1], 'a');
+		pile->ret_mv += pb(&pile->pile_a, &pile->pile_b);
+		print(pile, 2);
+		pile->pile_a.size -= 1;
+		pile->pile_a.min = shrmin2(&pile->pile_a);
+		i++;
+	}
+	if (pile->pile_a.beg != NULL && solve3(pile) == 0)
+		return (0);
+/*	tmp = pile->pile_b.beg;
+	while (tmp != NULL)
+	{
+		tmp = tmp->next;
+		ft_printf(">>next=%d<<<", tmp->next);
+		pile->ret_mv += pa(&pile->pile_a, &pile->pile_b);
+		if(pile->pile_b.beg != NULL)
+			print(pile, 1);
+		else
+			print_last(pile, 1);
+		ft_printf(">>next=%d<<<", tmp->next);
+//		if (tmp->next == NULL)
+//			break;
+	}*/
+	return (1);
+}

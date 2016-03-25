@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 18:53:39 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/24 22:46:35 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/25 12:41:55 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,19 @@ int		swap_last(t_2pile *pile)
 {
 	if (pile->pile_a.last->data > pile->pile_a.last->prev->prev->data)
 	{
-	pile->ret_mv += rra(&pile->pile_a);
-	print(pile, 7);
-	pile->ret_mv += rra(&pile->pile_a);
-	print(pile, 7);
-	pile->ret_mv += sa(&pile->pile_a);
-	print(pile, 3);
-	pile->ret_mv += ra(&pile->pile_a);
-	print(pile, 5);
-	pile->ret_mv += ra(&pile->pile_a);
-	print_last(pile, 5);
-}
-else{
-	solve2(pile);
-}
+		pile->ret_mv += rra(&pile->pile_a);
+		print(pile, 7);
+		pile->ret_mv += rra(&pile->pile_a);
+		print(pile, 7);
+		pile->ret_mv += sa(&pile->pile_a);
+		print(pile, 3);
+		pile->ret_mv += ra(&pile->pile_a);
+		print(pile, 5);
+		pile->ret_mv += ra(&pile->pile_a);
+		print_last(pile, 5);
+	}
+	else
+		solve2(pile);
 	return (1);
 }
 
@@ -73,7 +72,7 @@ int		reverse_pile(t_2pile *pile)
 			print(pile, 8);
 		}
 		pile->ret_mv += pa(&pile->pile_a, &pile->pile_b);
-		if(pile->pile_b.beg != NULL)
+		if (pile->pile_b.beg != NULL)
 			print(pile, 1);
 		else
 			print_last(pile, 1);
@@ -88,8 +87,9 @@ int		basic_test(t_2pile *pile)
 	if ((error = nb_error(pile)) == 0)
 		return (1);
 	else if (error == 1 &&
-			(pile->pile_a.beg->data > pile->pile_a.beg->next->data)&&
-			(pile->pile_a.beg->data < pile->pile_a.last->data || pile->pile_a.size == 2))
+			(pile->pile_a.beg->data > pile->pile_a.beg->next->data) &&
+			(pile->pile_a.beg->data < pile->pile_a.last->data ||
+			pile->pile_a.size == 2))
 	{
 		pile->ret_mv += sa(&pile->pile_a);
 		print_last(pile, 3);
@@ -101,19 +101,20 @@ int		basic_test(t_2pile *pile)
 		reverse_pile3(pile);
 	else if (error == (pile->pile_a.size - 1))
 		reverse_pile(pile);
-	else if (pile->pile_a.size < 7)
+	else if (pile->pile_a.size < 6)
 		solve2(pile);
 	else
 		return (0);
 	return (1);
 }
 
-int		shrmin2(t_pile	*pile)
+int		shrmin2(t_pile *pile)
 {
 	t_node	*tmp;
 	int		min2;
+
 	if (pile->beg == NULL)
-		return (007);
+		return (707);
 	tmp = pile->beg;
 	min2 = tmp->data;
 	while (tmp)
@@ -140,7 +141,7 @@ int		solve3(t_2pile *pile)
 	else if (error == (pile->pile_a.size - 1) && error == 2)
 		reverse_pile3(pile);
 	else
-		return(0);
+		return (0);
 	return (1);
 }
 
@@ -168,19 +169,5 @@ int		solve2(t_2pile *pile)
 	}
 	if (pile->pile_a.beg != NULL && solve3(pile) == 0)
 		return (0);
-/*	tmp = pile->pile_b.beg;
-	while (tmp != NULL)
-	{
-		tmp = tmp->next;
-		ft_printf(">>next=%d<<<", tmp->next);
-		pile->ret_mv += pa(&pile->pile_a, &pile->pile_b);
-		if(pile->pile_b.beg != NULL)
-			print(pile, 1);
-		else
-			print_last(pile, 1);
-		ft_printf(">>next=%d<<<", tmp->next);
-//		if (tmp->next == NULL)
-//			break;
-	}*/
 	return (1);
 }
