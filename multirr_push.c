@@ -6,13 +6,13 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 12:08:25 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/25 12:09:08 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/25 15:49:02 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Includes/push_swap.h"
 
-void	multi_r_pile(t_2pile *pile, int n, char p)
+void		multi_r_pile(t_2pile *pile, int n, char p)
 {
 	if (p == 'a')
 	{
@@ -34,7 +34,7 @@ void	multi_r_pile(t_2pile *pile, int n, char p)
 	}
 }
 
-void	multi_rr_pile(t_2pile *pile, int n, char p)
+void		multi_rr_pile(t_2pile *pile, int n, char p)
 {
 	if (p == 'a')
 	{
@@ -56,7 +56,7 @@ void	multi_rr_pile(t_2pile *pile, int n, char p)
 	}
 }
 
-void	push0(t_2pile *pile, int n)
+void		push0(t_2pile *pile, int n)
 {
 	if (n != 0)
 		multi_r_pile(pile, n, 'b');
@@ -64,7 +64,7 @@ void	push0(t_2pile *pile, int n)
 	print(pile, 2);
 }
 
-void	push1(t_2pile *pile, int n)
+void		push1(t_2pile *pile, int n)
 {
 	if (n != 0)
 		multi_rr_pile(pile, n, 'b');

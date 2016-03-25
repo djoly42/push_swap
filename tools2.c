@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 10:20:45 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/24 20:22:24 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/25 14:26:35 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		check_bonus(t_2pile *pile, char *str)
 		pile->error = 2;
 		return (1);
 	}
-	if(str[2] != '\0')
+	if (str[2] != '\0')
 	{
 		pile->error = 2;
 		return (1);
@@ -53,15 +53,10 @@ static int		check_nbr(t_2pile *pile, char *str)
 		}
 		i++;
 	}
-	if (i > 11)
-	{
-		pile->error = 3;
-		return (1);
-	}
 	return (0);
 }
 
-int			not_valid(t_2pile *pile, char *str)
+int				not_valid(t_2pile *pile, char *str)
 {
 	int		i;
 

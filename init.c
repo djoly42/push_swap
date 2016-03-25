@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 11:26:14 by djoly             #+#    #+#             */
-/*   Updated: 2016/03/25 11:14:56 by djoly            ###   ########.fr       */
+/*   Updated: 2016/03/25 14:24:08 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int		init_first(t_2pile *pile, int *tab, char **av, t_node *tmp)
 		else if (tab[2] == 2)
 			tab[1]++;
 		if (tab[0] == 0)
+			return (1);
+		if (tab[1] > tab[0])
 			return (1);
 	}
 	tmp->data = ft_atoi(av[tab[1]]);

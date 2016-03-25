@@ -1,3 +1,39 @@
+
+int		is_tri(t_pile *pile)
+{
+	t_node	*tmp;
+
+	tmp = pile->beg->next;
+	while (tmp)
+	{
+		if (tmp->data < tmp->prev->data)
+			return (0);
+		tmp = tmp->next;
+	}
+	ft_printf("\033[35m>>>Pile triee<<<\n\x1B[0m");
+	return (1);
+}
+
+int		is_tri2(t_pile *pile)
+{
+	t_node	*tmp;
+
+	tmp = pile->beg->next;
+	while (tmp)
+	{
+		if (tmp->data > tmp->prev->data)
+		{
+			if (tmp->data != pile->max)
+				return (0);
+		}
+		tmp = tmp->next;
+	}
+	ft_printf("\033[35m>>>Pile triee<<<\n\x1B[0m");
+	return (1);
+}
+
+
+
 void	push2(t_pile *pile_a, t_pile *pile_b, int n)
 {
 	rra(pile_a);
@@ -275,5 +311,81 @@ int		solve2(t_2pile *pile)
 //		if (tmp->next == NULL)
 //			break;
 	}*/
+	return (1);
+}
+
+int		pb(t_pile *pile_a, t_pile *pile_b)
+{
+	t_node		*tmp;
+
+	if (pile_a->beg == NULL)
+		return (0);
+	tmp = pile_a->beg;
+	if (pile_a->beg->next != NULL)
+	{
+		pile_a->beg = node_beg(pile_a->beg->next, NULL);
+		/*
+		pile_a->beg = pile_a->beg->next;
+		pile_a->beg->prev = NULL;
+		*/
+	}
+	else
+		init_pile_null(pile_a);
+	if (pile_b->beg != NULL)
+	{
+		tmp->next = pile_b->beg;
+		pile_b->beg = tmp;
+		pile_b->beg->next->prev = pile_b->beg;
+		pile_b->beg->prev = NULL;
+	}
+	else
+	{
+		tmp->next = NULL;
+		tmp->prev = NULL;
+		pile_b->beg = tmp;
+		pile_b->last = tmp;
+		pile_b->max = tmp->data;
+		pile_b->min = tmp->data;
+	}
+	if (tmp->data > pile_b->max)
+		pile_b->max = tmp->data;
+	if (tmp->data < pile_b->min)
+		pile_b->min = tmp->data;
+	return (1);
+}
+
+int		pa(t_pile *pile_a, t_pile *pile_b)
+{
+	t_node		*tmp;
+
+	if (pile_b->beg == NULL)
+		return (0);
+	tmp = pile_b->beg;
+	if (pile_b->beg->next != NULL)
+	{
+		pile_b->beg = node_beg(pile_b->beg->next, NULL);
+		//pile_b->beg = pile_b->beg->next;
+		//pile_b->beg->prev = NULL;
+	}
+	else
+		init_pile_null(pile_b);
+	if (pile_a->beg != NULL)
+	{
+		tmp->next = pile_a->beg;
+		pile_a->beg = tmp;
+		pile_a->beg->next->prev = pile_a->beg;
+		pile_a->beg->prev = NULL;
+	}
+	else
+	{
+		tmp->next = NULL;
+		tmp->prev = NULL;
+		pile_a->beg = tmp;
+		pile_a->last = tmp;
+	}
+	if (tmp->data > pile_a->max)
+		pile_a->max = tmp->data;
+	if (tmp->data < pile_a->min)
+		pile_a->min = tmp->data;
 	return (1);
 }

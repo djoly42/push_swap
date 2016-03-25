@@ -1,66 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/25 13:43:16 by djoly             #+#    #+#             */
+/*   Updated: 2016/03/25 14:17:04 by djoly            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Includes/push_swap.h"
 
-int		sa(t_pile *pile)
+t_node	*node_beg(t_node *node, t_node *prev)
 {
-    int tmp;
-    int i;
+	t_node	*tmp;
 
-    tmp = pile->beg->data;
-    i  = pile->beg->index;
-    pile->beg->data = pile->beg->next->data;
-    pile->beg->index = pile->beg->next->index;
-    pile->beg->next->data = tmp;
-    pile->beg->next->index = i;
-	//ft_putstr("sa ");
-	//pile->size += 1;
-	return (1);
+	tmp = node;
+	tmp->prev = prev;
+	return (tmp);
 }
 
-int		sb(t_pile *pile)
+t_node	*node_beg2(t_node *tmp, t_node *beg1)
 {
-    int tmp;
-    int i;
-
-    tmp = pile->beg->data;
-    i  = pile->beg->index;
-    pile->beg->data = pile->beg->next->data;
-    pile->beg->index = pile->beg->next->index;
-    pile->beg->next->data = tmp;
-    pile->beg->next->index = i;
-//	ft_putstr("sb ");
-//	pile->size += 1;
-	return (1);
-}
-
-void    ss(t_pile *pile_a, t_pile *pile_b)
-{
-    sa(pile_a);
-    sb(pile_b);
-
+	tmp->next = beg1;
+	beg1 = tmp;
+	beg1->next->prev = beg1;
+	beg1->prev = NULL;
+	return (beg1);
 }
 
 int		pb(t_pile *pile_a, t_pile *pile_b)
 {
-	t_node  *tmp;
-//	pile_a->size = pile_a->size + 1;
+	t_node		*tmp;
+
 	if (pile_a->beg == NULL)
-		return (0) ;
+		return (0);
 	tmp = pile_a->beg;
 	if (pile_a->beg->next != NULL)
-	{
-		pile_a->beg = pile_a->beg->next;
-		pile_a->beg->prev = NULL;
-	}
+		pile_a->beg = node_beg(pile_a->beg->next, NULL);
 	else
 		init_pile_null(pile_a);
 	if (pile_b->beg != NULL)
-	{
-		tmp->next = pile_b->beg;
-		pile_b->beg= tmp;
-		pile_b->beg->next->prev = pile_b->beg;
-		pile_b->beg->prev = NULL;
-	}
+		pile_b->beg = node_beg2(tmp, pile_b->beg);
 	else
 	{
 		tmp->next = NULL;
@@ -74,36 +56,24 @@ int		pb(t_pile *pile_a, t_pile *pile_b)
 		pile_b->max = tmp->data;
 	if (tmp->data < pile_b->min)
 		pile_b->min = tmp->data;
-//	ft_putstr("pb ");
-	//pile_a->size += 1;
 	return (1);
 }
 
 int		pa(t_pile *pile_a, t_pile *pile_b)
 {
-	t_node  *tmp;
+	t_node		*tmp;
 
 	if (pile_b->beg == NULL)
 		return (0);
 	tmp = pile_b->beg;
 	if (pile_b->beg->next != NULL)
-	{
-		pile_b->beg = pile_b->beg->next;
-		pile_b->beg->prev = NULL;
-	}
+		pile_b->beg = node_beg(pile_b->beg->next, NULL);
 	else
 		init_pile_null(pile_b);
 	if (pile_a->beg != NULL)
-	{
-		//ft_putstr(">>IF");
-		tmp->next = pile_a->beg;
-		pile_a->beg= tmp;
-		pile_a->beg->next->prev = pile_a->beg;
-		pile_a->beg->prev = NULL;
-	}
+		pile_a->beg = node_beg2(tmp, pile_a->beg);
 	else
 	{
-		//ft_putstr(">>ELSE");
 		tmp->next = NULL;
 		tmp->prev = NULL;
 		pile_a->beg = tmp;
@@ -113,15 +83,13 @@ int		pa(t_pile *pile_a, t_pile *pile_b)
 		pile_a->max = tmp->data;
 	if (tmp->data < pile_a->min)
 		pile_a->min = tmp->data;
-//	ft_putstr("pa ");
-//	pile_a->size += 1;
 	return (1);
 }
 
 int		ra(t_pile *pile_a)
 {
-//	pile_a->size = pile_a->size + 1;
-	t_node  *tmp;
+	t_node	*tmp;
+
 	tmp = pile_a->beg;
 	pile_a->beg = pile_a->beg->next;
 	pile_a->beg->prev = NULL;
@@ -129,65 +97,5 @@ int		ra(t_pile *pile_a)
 	tmp->prev = pile_a->last;
 	pile_a->last = tmp;
 	pile_a->last->next = NULL;
-//	ft_putstr("ra ");
-//	pile_a->size += 1;
 	return (1);
-}
-
-int		rb(t_pile *pile_b)
-{
-//	pile_b->size = pile_b->size + 1;
-	t_node  *tmp;
-	tmp = pile_b->beg;
-	pile_b->beg = pile_b->beg->next;
-	pile_b->beg->prev = NULL;
-	pile_b->last->next = tmp;
-	tmp->prev = pile_b->last;
-	pile_b->last = tmp;
-	pile_b->last->next = NULL;
-//	ft_putstr("rb ");
-//	pile_b->size += 1;
-	return (1);
-}
-
-void    rr(t_pile *pile_a, t_pile *pile_b)
-{
-	ra(pile_a);
-	rb(pile_b);
-}
-
-int		rra(t_pile *pile_a)
-{
-//	pile_a->size = pile_a->size + 1;
-	t_node  *tmp;
-	tmp = pile_a->last;
-	pile_a->last = pile_a->last->prev;
-	pile_a->last->next = NULL;
-	pile_a->beg->prev = tmp;
-	tmp->next = pile_a->beg;
-	pile_a->beg = tmp;
-	pile_a->beg->prev = NULL;
-//	ft_putstr("rra ");
-//	pile_a->size += 1;
-	return (1);
-}
-
-int		rrb(t_pile *pile_b)
-{
-//	pile_b->size = pile_b->size + 1;
-	t_node  *tmp;
-	tmp = pile_b->last;
-	pile_b->last = pile_b->last->prev;
-	pile_b->last->next = NULL;
-	pile_b->beg->prev = tmp;
-	tmp->next = pile_b->beg;
-	pile_b->beg = tmp;
-	pile_b->beg->prev = NULL;
-//	ft_putstr("rrb ");
-	return (1);
-}
-void    rrr(t_pile *pile_a, t_pile *pile_b)
-{
-	rra(pile_a);
-	rrb(pile_b);
 }
