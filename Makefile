@@ -8,7 +8,7 @@ FLAGS = -Wall -Werror -Wextra
 LIB = Lib/libftprintf.a
 
 HEAD = Includes/
- #
+
 SRC = bonus.c chr_min_max.c init.c init2.c main.c multirr_push.c \
 	solve.c solve1.c \
 	solve3.c tools.c tools0.c tools00.c\
