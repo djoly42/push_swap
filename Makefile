@@ -24,9 +24,9 @@ $(LIB):
 
 $(NAME):$(LIB) $(OBJ)
 	$(CC) $(FLAGS) -o $@ $(OBJ) $(LIB)
-
-%.o: %.c
 	$(CC) $(FLAGS) -I $(HEAD) -o $@ -c $<
+
+#%.o: %.c
 
 clean:
 	/bin/rm -f $(OBJ)
